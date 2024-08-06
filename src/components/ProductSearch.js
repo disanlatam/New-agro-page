@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import products from "../data/products";
 import searchIcon from "../assets/search-icon.png";
 import IconForSearch from "./IconsForSearch";
 import { ReactComponent as Bioestimulantes } from "../assets/bioestimulantes.svg";
@@ -28,6 +30,7 @@ const SearchInput = styled.input`
   text-align: center; /* Center the placeholder text */
   margin-top: 2.5%;
 `;
+
 const IconsContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -38,6 +41,7 @@ const IconsContainer = styled.div`
   gap: 1rem;
   box-sizing: border-box;
 `;
+
 const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -50,12 +54,41 @@ const SearchContainer = styled.div`
   padding: 5% 2%;
 `;
 
+const ProductList = styled.ul`
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+  max-width: 70vw;
+`;
+
+const ProductItem = styled.li`
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f9f9f9;
+  }
+`;
+
 const ProductSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState(products);
 
   const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-    // Perform search logic here
+    const term = e.target.value.toLowerCase();
+    setSearchTerm(term);
+
+    const filtered = products.filter(
+      (product) =>
+        product.name.toLowerCase().includes(term) ||
+        product.composition.toLowerCase().includes(term)
+    );
+
+    setFilteredProducts(filtered);
   };
 
   return (
@@ -74,6 +107,13 @@ const ProductSearch = () => {
         value={searchTerm}
         onChange={handleSearch}
       />
+      <ProductList>
+        {filteredProducts.map((product, index) => (
+          <ProductItem key={index}>
+            <Link to={`/product/${product.name}`}>{product.name}</Link>
+          </ProductItem>
+        ))}
+      </ProductList>
     </SearchContainer>
   );
 };

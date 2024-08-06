@@ -8,6 +8,9 @@ const Container = styled.div`
   align-items: center;
   background-color: ${(props) => props.theme.colors.secondary};
   padding: 10px 20px;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const TopLinks = styled.div`
@@ -25,6 +28,10 @@ const TopLinks = styled.div`
       transform: scale(1.1);
       font-weight: bold;
     }
+  }
+
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 const TopBar = () => {
