@@ -122,7 +122,7 @@ const Home = () => {
         <img src={banner20anios} alt="Banner NPK" />
       </Banner>
       <ProductSearch />
-      <Products>
+      {/* <Products>
         <Hero>
           <img id="mayacert" src={mayacert} alt="Logo Mayacert" />
           <h2>Descubre nuestro portafolio de</h2>
@@ -169,8 +169,8 @@ const Home = () => {
             </p>
           </div>
         </ContenedorExplain>
-      </Explain>
-      <Footer />
+      </Explain> */}
+      {/* <Footer /> */}
     </Container>
   );
 };

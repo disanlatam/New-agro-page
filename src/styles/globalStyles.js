@@ -13,6 +13,8 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: Titillium Web, sans-serif;
     text-align: center;
+    overflow-x: hidden;
+    overflow-y: scroll;
   }
   
 `;
