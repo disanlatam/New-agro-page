@@ -35,6 +35,7 @@ const SearchInput = styled.input`
 
 const IconsContainer = styled.div`
   display: flex;
+  max-width: 70vw;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
