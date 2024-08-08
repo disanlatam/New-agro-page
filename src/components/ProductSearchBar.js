@@ -70,7 +70,7 @@ const ProductList = styled.ul`
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 20px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 2;
   max-height: 300px;
   overflow-y: auto;
@@ -81,17 +81,11 @@ const ProductList = styled.ul`
 
 const ProductItem = styled.li`
   margin: 0;
-  padding: 10px;
   border-bottom: 1px solid #ddd;
   background-color: #fff;
   cursor: pointer;
+  position: relative; /* Added for positioning */
 
-  a {
-    text-decoration: none;
-    visited: none;
-    color: ${(props) => props.theme.colors.green};
-    font-size: 1rem;
-  }
   &:hover {
     background-color: ${(props) => props.theme.colors.green};
     color: ${(props) => props.theme.colors.white};
@@ -104,6 +98,18 @@ const ProductItem = styled.li`
   &:last-child {
     border-bottom: none;
   }
+
+  /* Make the link cover the entire list item */
+  a {
+    text-decoration: none;
+    color: ${(props) => props.theme.colors.green};
+    font-size: 1rem;
+    width: 100%;
+    display: block;
+    height: 100%;
+    padding: 10px; /* Add padding if needed */
+    box-sizing: border-box;
+  }
 `;
 
 const ProductSearch = () => {
@@ -112,6 +118,7 @@ const ProductSearch = () => {
     products.slice(0, 5)
   );
   const [isFocused, setIsFocused] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
     setFilteredProducts(products.slice(0, 5));
@@ -139,7 +146,10 @@ const ProductSearch = () => {
   };
 
   return (
-    <SearchContainer>
+    <SearchContainer
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
       <IconsContainer>
         <IconForSearch svg={<Bioestimulantes />} title="Bioestimulantes" />
         <IconForSearch svg={<Edaficos />} title="Edáficos" />
@@ -154,9 +164,9 @@ const ProductSearch = () => {
         value={searchTerm}
         onChange={handleSearch}
         onFocus={() => setIsFocused(true)}
-        // onBlur={() => setIsFocused(false)}
+        onBlur={() => setIsFocused(false)}
       />
-      {isFocused && (
+      {(isFocused || isHovering) && (
         <ProductList>
           {filteredProducts.map((product, index) => (
             <ProductItem key={index}>

@@ -2,7 +2,7 @@ import React from "react";
 import bannerNpk from "../assets/banner-npk.jpg";
 import banner20anios from "../assets/20 años_Banner WEB.png";
 import styled from "styled-components";
-import ProductSearch from "../components/ProductSearch";
+import ProductSearch from "../components/ProductSearchBar";
 import map from "../assets/map.png";
 import patent from "../assets/Patentkali-8.png";
 import fylloton from "../assets/fylloton.png";
@@ -122,7 +122,7 @@ const Home = () => {
         <img src={banner20anios} alt="Banner NPK" />
       </Banner>
       <ProductSearch />
-      {/* <Products>
+      <Products>
         <Hero>
           <img id="mayacert" src={mayacert} alt="Logo Mayacert" />
           <h2>Descubre nuestro portafolio de</h2>
@@ -135,7 +135,7 @@ const Home = () => {
           <img src={patent} alt="fylloton" />
         </Images>
       </Products>
-      <Explain>
+      {/* <Explain>
         <Impulsamos>
           <p>
             <b>Impulsamos iniciativas</b> <br></br>
