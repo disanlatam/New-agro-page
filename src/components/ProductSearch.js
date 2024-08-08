@@ -15,7 +15,7 @@ const SearchInput = styled.input`
   padding: 10px;
   border: none;
   border-radius: 20px;
-  font-size: 1.5rem;
+  font-size: 1rem;
   width: 100%;
   max-width: 70vw;
   background-image: url(${searchIcon});
@@ -28,6 +28,9 @@ const SearchInput = styled.input`
   background-origin: content-box;
   text-align: center;
   margin-top: 2.5%;
+  @media (min-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const IconsContainer = styled.div`
@@ -61,16 +64,19 @@ const ProductList = styled.ul`
   width: 100%;
   max-width: 70vw;
   position: absolute;
-  top: calc(100% + 10px);
+  top: calc(96%);
   left: 50%;
   transform: translateX(-50%);
   background-color: #fff;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 20px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 2;
   max-height: 300px;
   overflow-y: auto;
+  @media (min-width: 768px) {
+    top: calc(90%);
+  }
 `;
 
 const ProductItem = styled.li`
@@ -80,8 +86,19 @@ const ProductItem = styled.li`
   background-color: #fff;
   cursor: pointer;
 
+  a {
+    text-decoration: none;
+    visited: none;
+    color: ${(props) => props.theme.colors.green};
+    font-size: 1rem;
+  }
   &:hover {
-    background-color: #f9f9f9;
+    background-color: ${(props) => props.theme.colors.green};
+    color: ${(props) => props.theme.colors.white};
+    a {
+      font-weight: bold;
+      color: ${(props) => props.theme.colors.white};
+    }
   }
 
   &:last-child {
