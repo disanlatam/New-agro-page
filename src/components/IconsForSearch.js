@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const IconWrapper = styled.button`
-  //   flex: 1 1 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,6 +15,10 @@ const IconWrapper = styled.button`
     fill: ${(props) => props.theme.colors.white};
     width: 64px;
     height: 64px;
+    @media (max-width: 768px) {
+      width: 32px;
+      height: 32px;
+    }
   }
   &:hover {
     transform: scale(1.1);
@@ -25,7 +28,10 @@ const IconWrapper = styled.button`
 const IconTitle = styled.span`
   color: ${(props) => props.theme.colors.white};
   padding-top: 0.5rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
+  @media (min-width: 768px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const IconForSearch = ({ svg, title, last }) => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import products from "../data/products";
@@ -22,12 +22,11 @@ const SearchInput = styled.input`
   background-repeat: no-repeat;
   background-position: right center;
   padding-right: 10px;
-  z-index: 1; /* Bring the icon to the front */
-  background-color: ${(props) =>
-    props.theme.colors.white}; /* Add a background color to the input */
-  background-size: 20px; /* Adjust the size of the background image */
-  background-origin: content-box; /* Position the background image inside the input */
-  text-align: center; /* Center the placeholder text */
+  z-index: 1;
+  background-color: ${(props) => props.theme.colors.white};
+  background-size: 20px;
+  background-origin: content-box;
+  text-align: center;
   margin-top: 2.5%;
 `;
 
@@ -52,7 +51,7 @@ const SearchContainer = styled.div`
   width: 100%;
   background-color: ${(props) => props.theme.colors.yellow};
   padding: 5% 2%;
-  position: relative; /* Establishes positioning context for ProductList */
+  position: relative;
 `;
 
 const ProductList = styled.ul`
@@ -61,21 +60,17 @@ const ProductList = styled.ul`
   margin: 0;
   width: 100%;
   max-width: 70vw;
-  position: absolute; /* Position the list absolutely */
-  top: calc(
-    100% + 10px
-  ); /* Place it just below the search input with a margin */
-  left: 50%; /* Align the left edge of the list to the center of the container */
-  transform: translateX(
-    -50%
-  ); /* Offset by half of the width to center it horizontally */
-  background-color: #fff; /* Ensure the background is white */
-  border: 1px solid #ddd; /* Add a border */
-  border-radius: 4px; /* Round the corners */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add a shadow */
-  z-index: 2; /* Ensure it appears above other content */
-  max-height: 300px; /* Optional: Limit the height and make it scrollable */
-  overflow-y: auto; /* Add scrolling if the list is too long */
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  max-height: 300px;
+  overflow-y: auto;
 `;
 
 const ProductItem = styled.li`
@@ -90,14 +85,20 @@ const ProductItem = styled.li`
   }
 
   &:last-child {
-    border-bottom: none; /* Remove border for the last item */
+    border-bottom: none;
   }
 `;
 
 const ProductSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState(products);
+  const [filteredProducts, setFilteredProducts] = useState(
+    products.slice(0, 5)
+  );
   const [isFocused, setIsFocused] = useState(false);
+
+  useEffect(() => {
+    setFilteredProducts(products.slice(0, 5));
+  }, []);
 
   const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();
@@ -117,7 +118,7 @@ const ProductSearch = () => {
       return nameMatches || compositionMatches;
     });
 
-    setFilteredProducts(filtered);
+    setFilteredProducts(filtered.slice(0, 5));
   };
 
   return (
@@ -135,8 +136,8 @@ const ProductSearch = () => {
         placeholder="Buscar producto"
         value={searchTerm}
         onChange={handleSearch}
-        onFocus={() => setIsFocused(true)} // Show the list when the input is focused
-        onBlur={() => setIsFocused(false)} // Hide the list when the input loses focus
+        onFocus={() => setIsFocused(true)}
+        // onBlur={() => setIsFocused(false)}
       />
       {isFocused && (
         <ProductList>
