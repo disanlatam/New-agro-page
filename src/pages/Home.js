@@ -11,6 +11,7 @@ import saco from "../assets/sacos-NPK-08.png";
 import siembra from "../assets/disan-siembra@2x.png";
 import pacto from "../assets/Logo_Pacto_Global_UN.png";
 import ColombiaMap from "../components/ColombiaMap";
+import ConctactForm from "../components/ContactForm";
 import Footer from "../components/Footer";
 
 const Explain = styled.div`
@@ -204,7 +205,9 @@ const Home = () => {
       <Banner>
         <img src={banner20anios} alt="Banner NPK" />
       </Banner>
+
       <ProductSearch />
+
       <Products>
         <Hero>
           <img id="mayacert" src={mayacert} alt="Logo Mayacert" />
@@ -216,6 +219,7 @@ const Home = () => {
           <ImageCarousel />
         </Slides>
       </Products>
+
       <Explain>
         <Impulsamos>
           <p>
@@ -272,6 +276,7 @@ const Home = () => {
           <p>Clientes Activos</p>
         </Content>
       </BackgroundContainer>
+
       <ExtraInfo>
         <ExtraContent>
           <h2>6</h2>
@@ -286,7 +291,11 @@ const Home = () => {
           <p>Regiones de cobertura</p>
         </ExtraContent>
       </ExtraInfo>
+
       <ColombiaMap />
+
+      <ConctactForm />
+
       <Footer />
     </Container>
   );
