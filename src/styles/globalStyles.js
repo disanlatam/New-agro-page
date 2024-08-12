@@ -15,8 +15,18 @@ const GlobalStyle = createGlobalStyle`
     text-align: center;
     overflow-x: hidden;
     overflow-y: scroll;
+
+    textarea {
+      border: none;
+      outline: none;
+      background: none;
+      resize: none; /* Opcional: desactiva el redimensionamiento si no lo deseas */
+      padding: 0;
+      margin: 0;
+      font: inherit; /* Hereda la fuente del contenedor */
+      box-shadow: none; /* Elimina la sombra del cuadro */
+    }
   }
-  
 `;
 
 export default GlobalStyle;

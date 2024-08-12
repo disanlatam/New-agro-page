@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import ColorTab from "./colorTab";
 
 const FormContainer = styled.div`
+  position: relative;
   display: flex;
   width: 90%;
   flex-direction: column;
@@ -137,6 +139,7 @@ const ContactForm = () => {
 
   return (
     <FormContainer>
+      <ColorTab color="yellow" />
       <h2>Contáctanos</h2>
       <Form onSubmit={handleSubmit}>
         <div className="container">

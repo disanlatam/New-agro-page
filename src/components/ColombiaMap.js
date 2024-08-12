@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React from "react";
 import fondo from "../assets/tierra textura.jpg";
 import mapa from "../assets/mapa.png";
+import ColorTab from "./colorTab";
 
 const MapContainer = styled.div`
   position: relative;
@@ -42,11 +43,25 @@ const MapContainer = styled.div`
       max-height: 1080px;
     }
   }
+
+  /* Pseudo-element for the green bar */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px; /* Maximum width for the bar */
+    height: 5px; /* Height of the bar */
+    background-color: #327541; /* Green color */
+    border-radius: 2px; /* Optional: Rounded corners for the bar */
+  }
 `;
 
 const ColombiaMap = () => {
   return (
     <MapContainer>
+      <ColorTab color="white" />
       <h2>CONOCE DONDE ESTAMOS</h2>
       <img src={mapa} alt="Mapa de colombia" />
       <p>
