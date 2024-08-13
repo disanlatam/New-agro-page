@@ -7,10 +7,7 @@ const DropdownContainer = styled.div`
   position: relative;
   display: inline-block;
   font-size: 1rem;
-
-  h4 {
-    margin-bottom: 5px;
-  }
+  min-width: 200px;
 `;
 
 const DropdownButton = styled.button`
@@ -25,7 +22,6 @@ const DropdownButton = styled.button`
   border-radius: 10px;
   font-size: 16px;
   width: 100%;
-  min-width: 150px;
 
   color: ${(props) => props.theme.colors.primary};
 `;

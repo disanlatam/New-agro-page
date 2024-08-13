@@ -2,27 +2,44 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Icon from "../components/IconsForSearch";
 import Dropdown from "../components/dropDownMenu";
+import BulletList from "../components/bulletList";
 import { ReactComponent as Bioestimulantes } from "../assets/bioestimulantes.svg";
 import { ReactComponent as Edaficos } from "../assets/edaficos.svg";
 import { ReactComponent as Foliares } from "../assets/foliares.svg";
 import { ReactComponent as Fertirrigacion } from "../assets/fertirrigacion.svg";
 import { ReactComponent as Coadyuvantes } from "../assets/coadyuvantes.svg";
 import { ReactComponent as Sustratos } from "../assets/sustratos.svg";
-import { BiArrowToBottom } from "react-icons/bi";
 
 const ProductSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCountry, setSelectedCountry] = useState("");
-
+  // const [selectedCultivations, setSelectedCultivations] = useState([]);
+  const countries = ["Colombia", "Perú", "Bolivia", "Argentina", "Chile"];
+  const cultivation = [
+    "Café",
+    "Cacao",
+    "Flores",
+    "Frutas",
+    "Hortalizas",
+    "Maíz",
+    "Papa",
+    "Plátano",
+    "Soja",
+    "Trigo",
+    "Uva",
+  ];
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
     // Add your search logic here
   };
 
-  const countries = ["Colombia", "Perú", "Bolivia", "Argentina", "Chile"]; // Lista de países
-
   const handleCountrySelect = (country) => {
     setSelectedCountry(country);
+  };
+
+  const handleCultivationSelect = (items) => {
+    // setSelectedCultivations(items);
+    console.log(items);
   };
   return (
     <Container>
@@ -50,27 +67,41 @@ const ProductSearch = () => {
             onSelect={handleCountrySelect}
             placeholder={"Todos los países"}
           />
+          <BulletList
+            title={"Cultivos"}
+            items={cultivation}
+            onSelect={handleCultivationSelect}
+            maxVisible={5}
+            showMoreText={"Más cultivos..."}
+          />
         </FilterContainer>
       </BottomContainer>
     </Container>
   );
 };
+
 const FilterContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   color: ${(props) => props.theme.colors.primary};
   text-align: left;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   padding: 5% 2%;
   width: 100%;
-  p {
-    font-weight: bold;
+
+  h4 {
+    margin-bottom: 10px;
   }
+
   @media (min-width: 768px) {
     flex-direction: column;
     max-width: 30vw;
     align-items: flex-start;
+  }
+  * {
+    font-size: 14px;
   }
 `;
 const BottomContainer = styled.div`
