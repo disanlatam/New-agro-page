@@ -3,12 +3,14 @@ import styled from "styled-components";
 import Icon from "../components/IconsForSearch";
 import Dropdown from "../components/dropDownMenu";
 import BulletList from "../components/bulletList";
+import ProductList from "../components/ProductList";
 import { ReactComponent as Bioestimulantes } from "../assets/bioestimulantes.svg";
 import { ReactComponent as Edaficos } from "../assets/edaficos.svg";
 import { ReactComponent as Foliares } from "../assets/foliares.svg";
 import { ReactComponent as Fertirrigacion } from "../assets/fertirrigacion.svg";
 import { ReactComponent as Coadyuvantes } from "../assets/coadyuvantes.svg";
 import { ReactComponent as Sustratos } from "../assets/sustratos.svg";
+import products from "../data/products";
 
 const ProductSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -75,6 +77,7 @@ const ProductSearch = () => {
             showMoreText={"Más cultivos..."}
           />
         </FilterContainer>
+        <ProductList products={products} />
       </BottomContainer>
     </Container>
   );
@@ -98,7 +101,7 @@ const FilterContainer = styled.div`
   @media (min-width: 768px) {
     flex-direction: column;
     max-width: 30vw;
-    align-items: flex-start;
+    justify-content: flex-start;
   }
   * {
     font-size: 14px;
