@@ -13,6 +13,7 @@ import pacto from "../assets/Logo_Pacto_Global_UN.png";
 import ColombiaMap from "../components/ColombiaMap";
 import ConctactForm from "../components/ContactForm";
 import Footer from "../components/Footer";
+import AlliesSwiper from "../components/alliesCards";
 
 const Explain = styled.div`
   display: flex;
@@ -199,6 +200,12 @@ const ExtraContent = styled.div`
   }
 `;
 
+const Allies = styled.div`
+  width: 100%;
+  max-width: 90%;
+  margin: 5% 2%;
+`;
+
 const Home = () => {
   return (
     <Container>
@@ -295,6 +302,10 @@ const Home = () => {
       <ColombiaMap />
 
       <ConctactForm />
+
+      <Allies>
+        <AlliesSwiper />
+      </Allies>
 
       <Footer />
     </Container>

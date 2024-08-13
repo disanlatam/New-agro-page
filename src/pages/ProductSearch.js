@@ -1,24 +1,136 @@
 import React, { useState } from "react";
+import styled from "styled-components";
+import Icon from "../components/IconsForSearch";
+import Dropdown from "../components/dropDownMenu";
+import { ReactComponent as Bioestimulantes } from "../assets/bioestimulantes.svg";
+import { ReactComponent as Edaficos } from "../assets/edaficos.svg";
+import { ReactComponent as Foliares } from "../assets/foliares.svg";
+import { ReactComponent as Fertirrigacion } from "../assets/fertirrigacion.svg";
+import { ReactComponent as Coadyuvantes } from "../assets/coadyuvantes.svg";
+import { ReactComponent as Sustratos } from "../assets/sustratos.svg";
+import { BiArrowToBottom } from "react-icons/bi";
 
 const ProductSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState("");
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
     // Add your search logic here
   };
 
+  const countries = ["Colombia", "Perú", "Bolivia", "Argentina", "Chile"]; // Lista de países
+
+  const handleCountrySelect = (country) => {
+    setSelectedCountry(country);
+  };
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Search for a product"
-        value={searchTerm}
-        onChange={handleSearch}
-      />
-      {/* Add your search results display here */}
-    </div>
+    <Container>
+      <TopContainer>
+        <IconsContainer>
+          <Icon svg={<Bioestimulantes />} title="Bioestimulantes" />
+          <Icon svg={<Edaficos />} title="Edáficos" />
+          <Icon svg={<Foliares />} title="Foliares" />
+          <Icon svg={<Fertirrigacion />} title="Fertirrigación" />
+          <Icon svg={<Coadyuvantes />} title="Coadyuvantes" />
+          <Icon svg={<Sustratos />} title="Sustratos" />
+        </IconsContainer>
+        <Input
+          type="text"
+          placeholder="Buscar Producto"
+          value={searchTerm}
+          onChange={handleSearch}
+        />
+      </TopContainer>
+      <BottomContainer>
+        <FilterContainer>
+          <Dropdown
+            items={countries}
+            title={"País"}
+            onSelect={handleCountrySelect}
+            placeholder={"Todos los países"}
+          />
+        </FilterContainer>
+      </BottomContainer>
+    </Container>
   );
 };
+const FilterContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  color: ${(props) => props.theme.colors.primary};
+  text-align: left;
+  justify-content: center;
+  align-items: center;
+  padding: 5% 2%;
+  width: 100%;
+  p {
+    font-weight: bold;
+  }
+  @media (min-width: 768px) {
+    flex-direction: column;
+    max-width: 30vw;
+    align-items: flex-start;
+  }
+`;
+const BottomContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+`;
+const IconsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  gap: 1rem;
+  max-width: 70vw;
+  @media (min-width: 768px) {
+    justify-content: space-around;
+    width: 100%;
+  }
+`;
+const TopContainer = styled.div`
+  background-color: ${(props) => props.theme.colors.green};
+  color: ${(props) => props.theme.colors.white};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5% 2%;
+  gap: 20px;
+`;
+const Input = styled.input`
+  width: 100%;
+  max-width: 70vw;
+  border: none;
+  padding: 10px;
+  margin: 0;
+  box-shadow: none;
+  background: white;
+  border-radius: 20px;
+  color: ${(props) => props.theme.colors.green};
+  font-weight: semibold;
+  font-size: 1.1rem;
+  text-align: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  &:checked,
+  &:indeterminate {
+    appearance: none;
+  }
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
 
 export default ProductSearch;

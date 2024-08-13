@@ -10,7 +10,19 @@ const products = [
       Magnesio: "10.0%",
       Azufre: "17.0%",
     },
-    image: "productsImg/PATENTKALI.jpg",
+    countries: [
+      "Colombia",
+      "Bolivia",
+      "Panamá",
+      "Ecuador",
+      "Perú",
+      "Chile",
+      "Paraguay",
+      "Uruguay",
+      "Brasil",
+      "Argentina",
+    ],
+    image: "/data/productsImg/PATENTKALI.jpg",
   },
   {
     name: "MACROMIX 12-12-17",
@@ -26,7 +38,8 @@ const products = [
       Magnesio: "2%",
       Elementos_varios: "0,22%",
     },
-    image: "productsImg/MACROMIX_12-12-17.jpg",
+    countries: ["Colombia", "Bolivia", "Panamá"],
+    image: "/data/productsImg/MACROMIX_12-12-17.jpg",
   },
   {
     name: "DISAPHOS CA",
@@ -45,7 +58,8 @@ const products = [
       Cobre: "2%",
       Zinc: "1%",
     },
-    image: "productsImg/DISAPHOS_CA.jpg",
+    countries: ["Colombia", "Bolivia", "Panamá"],
+    image: "/data/productsImg/DISAPHOS_CA.jpg",
   },
   {
     name: "FERTILEAF 20-20-20",
@@ -65,7 +79,8 @@ const products = [
       Zinc: "0.06%",
       Aminoacidos_totales: "1.0%",
     },
-    image: "productsImg/FERTILEAF_20-20-20.jpg",
+    countries: ["Colombia", "Bolivia", "Panamá"],
+    image: "/data/productsImg/FERTILEAF_20-20-20.jpg",
   },
   {
     name: "FERTILEAF FÓSFORO",
@@ -83,7 +98,8 @@ const products = [
       Cobre: "0.02%",
       Aminoacidos_totales: "1%",
     },
-    image: "productsImg/FERTILEAF_FÓSFORO.jpg",
+    countries: ["Colombia", "Bolivia", "Panamá"],
+    image: "",
   },
   {
     name: "FERTILEAF CALCIO-BORO-ZINC",
@@ -97,7 +113,8 @@ const products = [
       Boro_soluble_en_agua: "6,75 g/L",
       Zinc_soluble_en_agua: "42,80 g/L",
     },
-    image: "productsImg/FERTILEAF_CALCIO-BORO-ZINC.jpg",
+    countries: ["Colombia", "Bolivia", "Panamá"],
+    image: "/data/productsImg/FERTILEAF_CALCIO-BORO-ZINC.jpg",
   },
   {
     name: "FERTILEAF POTASIO",
@@ -112,7 +129,8 @@ const products = [
       Extractos_humicos: "0.05%",
       Aminoacidos_totales: "0.50%",
     },
-    image: "productsImg/FERTILEAF_POTASIO.jpg",
+    countries: ["Colombia", "Bolivia", "Panamá"],
+    image: "/data/productsImg/FERTILEAF_POTASIO.jpg",
   },
   {
     name: "MF DISAN INICIO 12-27-13",
@@ -127,7 +145,8 @@ const products = [
       Fósforo_asimilable: "27%",
       Potasio_soluble_en_agua: "13%",
     },
-    image: "productsImg/MF_DISAN_INICIO_12-27-13.jpg",
+    countries: ["Colombia", "Bolivia", "Panamá"],
+    image: "/data/productsImg/MF_DISAN_INICIO_12-27-13.jpg",
   },
 ];
 

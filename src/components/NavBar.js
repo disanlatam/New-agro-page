@@ -197,9 +197,9 @@ const NavBar = () => {
           Nosotros
         </NavLink>
         <NavLink
-          to="/portafolio"
-          onClick={() => handleLinkClick("/portafolio")}
-          className={activeLink === "/portafolio" ? "active" : ""}
+          to="/product-search"
+          onClick={() => handleLinkClick("/product-search")}
+          className={activeLink === "/product-search" ? "active" : ""}
         >
           Portafolio
         </NavLink>
