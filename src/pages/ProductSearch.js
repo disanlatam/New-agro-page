@@ -10,7 +10,7 @@ import { ReactComponent as Foliares } from "../assets/foliares.svg";
 import { ReactComponent as Fertirrigacion } from "../assets/fertirrigacion.svg";
 import { ReactComponent as Coadyuvantes } from "../assets/coadyuvantes.svg";
 import { ReactComponent as Sustratos } from "../assets/sustratos.svg";
-import products from "../data/products";
+import products from "../data/products copy"; //Copia de prueba de productos
 
 const ProductSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");

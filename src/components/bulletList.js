@@ -29,6 +29,7 @@ const Bullet = styled.button`
 const ShowMoreButton = styled.div`
   color: ${(props) => props.theme.colors.green};
   cursor: pointer;
+  padding: 5px 10px;
   &:hover {
     text-decoration: underline;
     font-weight: bold;

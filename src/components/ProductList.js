@@ -20,12 +20,15 @@ const ProductsList = ({ products }) => {
     <div>
       <h1>Total de productos: {products.length}</h1>
       <ul>
-        {currentItems.map((product, index) => (
-          <li key={index}>
-            <h2>{product.name}</h2>
-            <p>{product.description}</p>
-          </li>
-        ))}
+        {currentItems.map((product, index) => {
+          // const imagePath = require(product.image);
+          return (
+            <li key={index}>
+              <img src={product.image} alt={product.name} />
+              <h2>{product.name}</h2>
+            </li>
+          );
+        })}
       </ul>
       <div>
         <span>
