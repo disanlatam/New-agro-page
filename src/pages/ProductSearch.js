@@ -4,6 +4,8 @@ import Icon from "../components/IconsForSearch";
 import Dropdown from "../components/dropDownMenu";
 import BulletList from "../components/bulletList";
 import ProductList from "../components/ProductList";
+import searchIcon from "../assets/search-icon.png";
+import Footer from "../components/Footer";
 import { ReactComponent as Bioestimulantes } from "../assets/bioestimulantes.svg";
 import { ReactComponent as Edaficos } from "../assets/edaficos.svg";
 import { ReactComponent as Foliares } from "../assets/foliares.svg";
@@ -59,7 +61,7 @@ const ProductSearch = () => {
           placeholder="Buscar Producto"
           value={searchTerm}
           onChange={handleSearch}
-        />
+        ></Input>
       </TopContainer>
       <BottomContainer>
         <FilterContainer>
@@ -79,6 +81,7 @@ const ProductSearch = () => {
         </FilterContainer>
         <ProductList products={products} />
       </BottomContainer>
+      <Footer />
     </Container>
   );
 };
@@ -92,7 +95,7 @@ const FilterContainer = styled.div`
   justify-content: center;
   align-items: flex-start;
   padding: 5% 2%;
-  width: 100%;
+  width: fit-content;
 
   h4 {
     margin-bottom: 10px;
@@ -144,8 +147,15 @@ const Input = styled.input`
   border: none;
   padding: 10px;
   margin: 0;
+  background-image: url(${searchIcon});
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 20px;
+  background-origin: content-box;
+  background-size: 20px;
+  background-origin: content-box;
+  z-index: 1;
   box-shadow: none;
-  background: white;
   border-radius: 20px;
   color: ${(props) => props.theme.colors.green};
   font-weight: semibold;
@@ -160,7 +170,6 @@ const Input = styled.input`
     appearance: none;
   }
 `;
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;

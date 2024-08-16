@@ -26,6 +26,8 @@ const SearchInput = styled.input`
   background-color: ${(props) => props.theme.colors.white};
   background-size: 20px;
   background-origin: content-box;
+  background-size: 20px;
+  background-origin: content-box;
   text-align: center;
   margin-top: 2.5%;
   @media (min-width: 768px) {
