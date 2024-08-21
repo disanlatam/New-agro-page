@@ -12,15 +12,19 @@ import { ReactComponent as Foliares } from "../assets/foliares.svg";
 import { ReactComponent as Fertirrigacion } from "../assets/fertirrigacion.svg";
 import { ReactComponent as Coadyuvantes } from "../assets/coadyuvantes.svg";
 import { ReactComponent as Sustratos } from "../assets/sustratos.svg";
-import products from "../data/products copy"; //Copia de prueba de productos
+import productsData from "../data/products copy"; //Copia de prueba de productos
 
 const ProductSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCountry, setSelectedCountry] = useState("");
-  // const [selectedCultivations, setSelectedCultivations] = useState([]);
+  const [selectedCultivations, setSelectedCultivations] = useState([]);
+
   const countries = ["Colombia", "Perú", "Bolivia", "Argentina", "Chile"];
   const cultivation = [
     "Café",
+    "Caña de azúcar",
+    "Canabis",
+    "Cereales",
     "Cacao",
     "Flores",
     "Frutas",
@@ -32,9 +36,10 @@ const ProductSearch = () => {
     "Trigo",
     "Uva",
   ];
+
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
-    // Add your search logic here
+    console.log(e.target.value);
   };
 
   const handleCountrySelect = (country) => {
@@ -42,9 +47,39 @@ const ProductSearch = () => {
   };
 
   const handleCultivationSelect = (items) => {
-    // setSelectedCultivations(items);
-    console.log(items);
+    setSelectedCultivations(items);
   };
+
+  // Función para filtrar productos
+  const filteredProducts = productsData.filter((product) => {
+    if (
+      searchTerm === "" &&
+      selectedCountry === "" &&
+      selectedCultivations.length === 0
+    )
+      return productsData;
+
+    const matchesDescription = searchTerm
+      ? product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        Object.values(product.composition)
+          .join(" ")
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()) ||
+        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      : true;
+    const matchesCountry = selectedCountry
+      ? product.countries.includes(selectedCountry)
+      : true;
+    const matchesCultivation =
+      selectedCultivations.length > 0
+        ? selectedCultivations.some((cultivation) =>
+            product.cultivation.includes(cultivation)
+          )
+        : true;
+
+    return matchesDescription && matchesCountry && matchesCultivation;
+  });
+
   return (
     <Container>
       <TopContainer>
@@ -61,7 +96,7 @@ const ProductSearch = () => {
           placeholder="Buscar Producto"
           value={searchTerm}
           onChange={handleSearch}
-        ></Input>
+        />
       </TopContainer>
       <BottomContainer>
         <FilterContainer>
@@ -79,7 +114,7 @@ const ProductSearch = () => {
             showMoreText={"Más cultivos..."}
           />
         </FilterContainer>
-        <ProductList products={products} />
+        <ProductList products={filteredProducts} />
       </BottomContainer>
       <Footer />
     </Container>
@@ -110,6 +145,7 @@ const FilterContainer = styled.div`
     font-size: 14px;
   }
 `;
+
 const BottomContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -118,6 +154,7 @@ const BottomContainer = styled.div`
     flex-direction: row;
   }
 `;
+
 const IconsContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -131,6 +168,7 @@ const IconsContainer = styled.div`
     width: 100%;
   }
 `;
+
 const TopContainer = styled.div`
   background-color: ${(props) => props.theme.colors.green};
   color: ${(props) => props.theme.colors.white};
@@ -141,6 +179,7 @@ const TopContainer = styled.div`
   padding: 5% 2%;
   gap: 20px;
 `;
+
 const Input = styled.input`
   width: 100%;
   max-width: 70vw;
@@ -152,8 +191,6 @@ const Input = styled.input`
   background-position: right center;
   background-size: 20px;
   background-origin: content-box;
-  background-size: 20px;
-  background-origin: content-box;
   z-index: 1;
   box-shadow: none;
   border-radius: 20px;
@@ -161,8 +198,6 @@ const Input = styled.input`
   font-weight: semibold;
   font-size: 1.1rem;
   text-align: inherit;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
 
   &:checked,
@@ -170,6 +205,7 @@ const Input = styled.input`
     appearance: none;
   }
 `;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;

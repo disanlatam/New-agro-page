@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import products from "../data/products";
+import products from "../data/products copy";
 import searchIcon from "../assets/search-icon.png";
 import IconForSearch from "./IconsForSearch";
 import { ReactComponent as Bioestimulantes } from "../assets/bioestimulantes.svg";
