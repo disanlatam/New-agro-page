@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Icon from "../components/IconsForSearch";
 import Dropdown from "../components/dropDownMenu";
@@ -10,32 +10,60 @@ import { ReactComponent as Bioestimulantes } from "../assets/bioestimulantes.svg
 import { ReactComponent as Edaficos } from "../assets/edaficos.svg";
 import { ReactComponent as Foliares } from "../assets/foliares.svg";
 import { ReactComponent as Fertirrigacion } from "../assets/fertirrigacion.svg";
-import { ReactComponent as Coadyuvantes } from "../assets/coadyuvantes.svg";
+import { ReactComponent as Solubles } from "../assets/coadyuvantes.svg";
 import { ReactComponent as Sustratos } from "../assets/sustratos.svg";
-import productsData from "../data/products copy"; //Copia de prueba de productos
+import productsData from "../data/products"; //Copia de prueba de productos
 
 const ProductSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedCultivations, setSelectedCultivations] = useState([]);
+  const [selectedHierarchy, setSelectedHierarchy] = useState("");
+
+  // Sync hierarchy filter with URL
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const hierarchy = urlParams.get("hierarchy");
+    if (hierarchy) {
+      setSelectedHierarchy(hierarchy);
+    }
+  }, []);
 
   const countries = ["Colombia", "Perú", "Bolivia", "Argentina", "Chile"];
   const cultivation = [
+    "Aguacate",
+    "Arroz",
+    "Banano",
+    "Berries",
     "Café",
+    "Cannabis Medicinal",
     "Caña de azúcar",
-    "Canabis",
-    "Cereales",
     "Cacao",
+    "Cereales",
+    "Esparrago",
     "Flores",
-    "Frutas",
+    "Flores de Corte",
+    "Frutales",
+    "Gramineas",
     "Hortalizas",
     "Maíz",
+    "Mango",
+    "Musaceas",
+    "Palma de Aceite",
     "Papa",
-    "Plátano",
-    "Soja",
-    "Trigo",
-    "Uva",
+    "Perennes",
+    "Soya",
+    "Solanaceas",
+    "Cultivos en desarrollo",
+    "Cultivos en etapa de producción",
   ];
+
+  const handleIconClick = (hierarchy) => {
+    setSelectedHierarchy(hierarchy);
+    const url = new URL(window.location);
+    url.searchParams.set("hierarchy", hierarchy);
+    window.history.pushState({}, "", url);
+  };
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -55,7 +83,8 @@ const ProductSearch = () => {
     if (
       searchTerm === "" &&
       selectedCountry === "" &&
-      selectedCultivations.length === 0
+      selectedCultivations.length === 0 &&
+      selectedHierarchy === ""
     )
       return productsData;
 
@@ -76,20 +105,42 @@ const ProductSearch = () => {
             product.cultivation.includes(cultivation)
           )
         : true;
+    const matchesHierarchy = selectedHierarchy
+      ? product.hierarchy
+          .toLowerCase()
+          .includes(selectedHierarchy.toLowerCase())
+      : true;
 
-    return matchesDescription && matchesCountry && matchesCultivation;
+    return (
+      matchesDescription &&
+      matchesCountry &&
+      matchesCultivation &&
+      matchesHierarchy
+    );
   });
 
   return (
     <Container>
       <TopContainer>
         <IconsContainer>
-          <Icon svg={<Bioestimulantes />} title="Bioestimulantes" />
-          <Icon svg={<Edaficos />} title="Edáficos" />
-          <Icon svg={<Foliares />} title="Foliares" />
-          <Icon svg={<Fertirrigacion />} title="Fertirrigación" />
-          <Icon svg={<Coadyuvantes />} title="Coadyuvantes" />
-          <Icon svg={<Sustratos />} title="Sustratos" />
+          {/* <Icon svg={<Bioestimulantes />} title="Bioestimulantes" /> */}
+          {/* <Icon svg={<Fertirrigacion />} title="Fertirrigación" /> */}
+          {/* <Icon svg={<Sustratos />} title="Sustratos" /> */}
+          <Icon
+            svg={<Edaficos />}
+            title="Edáficos"
+            onClick={() => handleIconClick("Edáficos")}
+          />
+          <Icon
+            svg={<Foliares />}
+            title="Foliares"
+            onClick={() => handleIconClick("Foliares")}
+          />
+          <Icon
+            svg={<Solubles />}
+            title="Solubles"
+            onClick={() => handleIconClick("Solubles")}
+          />
         </IconsContainer>
         <Input
           type="text"
@@ -164,7 +215,8 @@ const IconsContainer = styled.div`
   gap: 1rem;
   max-width: 70vw;
   @media (min-width: 768px) {
-    justify-content: space-around;
+    justify-content: center;
+    gap: 50px;
     width: 100%;
   }
 `;

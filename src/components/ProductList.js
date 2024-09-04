@@ -70,7 +70,9 @@ const Item = styled.div`
     font-weight: normal;
   }
   img {
-    max-width: 200px;
+    width: 150px;
+    height: auto;
+    max-height: 150px;
   }
   a {
     text-decoration: none;

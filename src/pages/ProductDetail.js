@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import products from "../data/products copy";
+import products from "../data/products";
 import styled from "styled-components";
 import ProductSearch from "../components/ProductSearchBar";
 import { BsWhatsapp, BsDownload } from "react-icons/bs";
@@ -54,7 +54,11 @@ const ProductDetail = () => {
             ))}
             <div>
               <h2>Cultivos</h2>
-              <p>product.cultivations</p>
+              <BulletContainer>
+                {product.cultivation.map((item) => (
+                  <Bullet key={item}>{item}</Bullet>
+                ))}
+              </BulletContainer>
             </div>
             <div>
               <h2>Proveedor</h2>
@@ -67,6 +71,32 @@ const ProductDetail = () => {
     </Container>
   );
 };
+
+const BulletContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+  width: 200px;
+  h4{
+   margin
+  }
+`;
+
+const Bullet = styled.button`
+  padding: 5px 10px !important;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: white;
+  color: ${(props) => props.theme.colors.primary};
+  &:hover {
+    color: white;
+    border-color: ${(props) => props.theme.colors.yellow};
+    transition: 0.2s;
+    background-color: ${(props) => props.theme.colors.yellow};
+  }
+`;
 const DownloadButton = styled.div`
   background-color: ${(props) => props.theme.colors.white};
   color: ${(props) => props.theme.colors.green};
