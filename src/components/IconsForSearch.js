@@ -34,9 +34,9 @@ const IconTitle = styled.span`
   }
 `;
 
-const IconForSearch = ({ svg, title, last }) => {
+const IconForSearch = ({ svg, title, last, onClick }) => {
   return (
-    <IconWrapper>
+    <IconWrapper onClick={onClick}>
       {svg}
       <IconTitle>{title}</IconTitle>
     </IconWrapper>

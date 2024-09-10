@@ -57,11 +57,15 @@ const ProductSearch = () => {
     "Cultivos en desarrollo",
     "Cultivos en etapa de producción",
   ];
+  const handleResetFilters = () => {
+    setSearchTerm("");
+    setSelectedCountry("");
+    setSelectedCultivations([]);
+    setSelectedHierarchy("");
 
-  const handleIconClick = (hierarchy) => {
-    setSelectedHierarchy(hierarchy);
+    // Limpiar los parámetros de la URL
     const url = new URL(window.location);
-    url.searchParams.set("hierarchy", hierarchy);
+    url.searchParams.delete("hierarchy");
     window.history.pushState({}, "", url);
   };
 
@@ -76,6 +80,14 @@ const ProductSearch = () => {
 
   const handleCultivationSelect = (items) => {
     setSelectedCultivations(items);
+  };
+
+  const handleIconClick = (hierarchy) => {
+    console.log(`Icon clicked: ${hierarchy}`);
+    setSelectedHierarchy(hierarchy);
+    const url = new URL(window.location);
+    url.searchParams.set("hierarchy", hierarchy);
+    window.history.pushState({}, "", url);
   };
 
   // Función para filtrar productos
@@ -124,23 +136,23 @@ const ProductSearch = () => {
       <TopContainer>
         <IconsContainer>
           {/* <Icon svg={<Bioestimulantes />} title="Bioestimulantes" /> */}
-          {/* <Icon svg={<Fertirrigacion />} title="Fertirrigación" /> */}
-          {/* <Icon svg={<Sustratos />} title="Sustratos" /> */}
           <Icon
             svg={<Edaficos />}
             title="Edáficos"
-            onClick={() => handleIconClick("Edáficos")}
+            onClick={() => handleIconClick("edáfico")}
           />
           <Icon
             svg={<Foliares />}
             title="Foliares"
-            onClick={() => handleIconClick("Foliares")}
+            onClick={() => handleIconClick("foliar")}
           />
+          {/* <Icon svg={<Fertirrigacion />} title="Fertirrigación" /> */}
           <Icon
             svg={<Solubles />}
             title="Solubles"
-            onClick={() => handleIconClick("Solubles")}
+            onClick={() => handleIconClick("soluble")}
           />
+          {/* <Icon svg={<Sustratos />} title="Sustratos" /> */}
         </IconsContainer>
         <Input
           type="text"
@@ -164,6 +176,9 @@ const ProductSearch = () => {
             maxVisible={5}
             showMoreText={"Más cultivos..."}
           />
+          <ResetButton onClick={handleResetFilters}>
+            Reiniciar Filtros
+          </ResetButton>
         </FilterContainer>
         <ProductList products={filteredProducts} />
       </BottomContainer>
@@ -171,6 +186,21 @@ const ProductSearch = () => {
     </Container>
   );
 };
+const ResetButton = styled.button`
+  background-color: ${(props) => props.theme.colors.red};
+  color: ${(props) => props.theme.colors.primary};
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 10px;
+
+  &:hover {
+    background-color: ${(props) => props.theme.colors.darkRed};
+  }
+`;
 
 const FilterContainer = styled.div`
   display: flex;

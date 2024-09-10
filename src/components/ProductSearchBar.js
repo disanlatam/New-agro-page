@@ -154,12 +154,9 @@ const ProductSearch = () => {
       onMouseLeave={() => setIsHovering(false)}
     >
       <IconsContainer>
-        <IconForSearch svg={<Bioestimulantes />} title="Bioestimulantes" />
         <IconForSearch svg={<Edaficos />} title="Edáficos" />
-        <IconForSearch svg={<Foliares />} title="Foliares" />
-        <IconForSearch svg={<Fertirrigacion />} title="Fertirrigación" />
-        <IconForSearch svg={<Coadyuvantes />} title="Coadyuvantes" />
-        <IconForSearch svg={<Sustratos />} title="Sustratos" />
+        <IconForSearch svg={<Foliares />} title="Foliar" />
+        <IconForSearch svg={<Coadyuvantes />} title="Solubles" />
       </IconsContainer>
       <SearchInput
         type="text"
