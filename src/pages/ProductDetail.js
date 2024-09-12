@@ -4,6 +4,8 @@ import products from "../data/products";
 import styled from "styled-components";
 import ProductSearch from "../components/ProductSearchBar";
 import { BsWhatsapp, BsDownload } from "react-icons/bs";
+import ContactCard from "../components/ContactCard";
+import Footer from "../components/Footer";
 
 const ProductDetail = () => {
   const { productName } = useParams();
@@ -46,12 +48,18 @@ const ProductDetail = () => {
             <p>{product.benefits}</p>
           </div>
           <div>
-            <h2>Composición</h2>
-            {Object.entries(product.composition).map(([key, value], index) => (
-              <p key={index}>
-                {key.replace(/_/g, " ")}: {value}
-              </p>
-            ))}
+            <Composition>
+              <h2>Composición</h2>
+              <CompCard>
+                {Object.entries(product.composition).map(
+                  ([key, value], index) => (
+                    <p key={index}>
+                      {key.replace(/_/g, " ")}: <b>{value}</b>
+                    </p>
+                  )
+                )}
+              </CompCard>
+            </Composition>
             <div>
               <h2>Cultivos</h2>
               <BulletContainer>
@@ -68,16 +76,60 @@ const ProductDetail = () => {
         </Bottom>
         {/* <p>{product.composition}</p> */}
       </DescriptionContainer>
+      <ContactCard title="¿Te interesa este producto?" />
+      <RelatedProducts>
+        <h2>
+          <b>PRODUCTOS</b> RELACIONADOS
+        </h2>
+      </RelatedProducts>
+      <Footer />
     </Container>
   );
 };
+
+const RelatedProducts = styled.div`
+  width: 100%;
+  padding: 5% 10%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  h2 {
+    color: ${(props) => props.theme.colors.green};
+    font-size: ${(props) => props.theme.fontSizes.normal};
+  }
+`;
+
+const Composition = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  aling-items: center;
+`;
+const CompCard = styled.div`
+  margin-top: 10px;
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 200px;
+  color: white;
+  background: rgb(215, 164, 69);
+  border: 0px solid transparent;
+  border-radius: 50px 0px 50px 0px;
+  background: linear-gradient(
+    45deg,
+    rgba(215, 164, 69, 1) 50%,
+    rgba(215, 164, 69, 0.4590628487723214) 100%
+  );
+`;
 
 const BulletContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 5px;
-  width: 200px;
+  width: 300px;
   h4{
    margin
   }
@@ -190,7 +242,12 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: ${(props) => props.theme.colors.primary};
   * {
+  }
+  h2 {
+    font-size: ${(props) => props.theme.fontSizes.xlarge};
+    font-weight: 400;
   }
 `;
 export default ProductDetail;

@@ -8,4 +8,12 @@ export const theme = {
     footerFill: "#666666",
     white: "#FFFFFF",
   },
+  fontSizes: {
+    small: "12px",
+    medium: "16px",
+    normal: "24px",
+    large: "28px",
+    xlarge: "32px",
+    xxlarge: "48px",
+  },
 };
