@@ -103,6 +103,11 @@ const ProductsList = ({ products }) => {
     }
   };
 
+  // Función para manejar el error de la imagen
+  const handleImageError = (event) => {
+    event.target.src = "productsImg/patentkali.png"; // Reemplaza con la ruta correcta de la imagen de patentkali
+  };
+
   return (
     <Container>
       <h1>
@@ -120,7 +125,11 @@ const ProductsList = ({ products }) => {
             <Item key={index}>
               {/* Enlace a la vista del producto */}
               <Link to={`/product/${product.name}`}>
-                <img src={product.image} alt={product.name} />
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  onError={handleImageError} // Aquí manejamos el error de la imagen
+                />
               </Link>
               <Link to={`/product/${product.name}`}>
                 <h2>{product.name}</h2>
@@ -134,7 +143,7 @@ const ProductsList = ({ products }) => {
           Atrás
         </PageButton>
         <span>
-          Página <b>{currentPage}</b> de
+          Página <b>{currentPage}</b> de{" "}
           {Math.ceil(products.length / itemsPerPage)}
         </span>
         <PageButton

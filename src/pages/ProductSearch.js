@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import normalizeString from "../utils/StringNormalization";
 import Icon from "../components/IconsForSearch";
 import Dropdown from "../components/dropDownMenu";
 import BulletList from "../components/bulletList";
 import ProductList from "../components/ProductList";
 import searchIcon from "../assets/search-icon.png";
+import ContactCard from "../components/ContactCard";
+import ComponentsToSearch from "../components/ComponentToSearch";
 import Footer from "../components/Footer";
 import { ReactComponent as Bioestimulantes } from "../assets/bioestimulantes.svg";
 import { ReactComponent as Edaficos } from "../assets/edaficos.svg";
@@ -12,7 +15,7 @@ import { ReactComponent as Foliares } from "../assets/foliares.svg";
 import { ReactComponent as Fertirrigacion } from "../assets/fertirrigacion.svg";
 import { ReactComponent as Solubles } from "../assets/coadyuvantes.svg";
 import { ReactComponent as Sustratos } from "../assets/sustratos.svg";
-import productsData from "../data/products"; //Copia de prueba de productos
+import productsData from "../data/newProducts"; //Copia de prueba de productos
 
 const ProductSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -28,7 +31,6 @@ const ProductSearch = () => {
       setSelectedHierarchy(hierarchy);
     }
   }, []);
-
   const countries = ["Colombia", "Perú", "Bolivia", "Argentina", "Chile"];
   const cultivation = [
     "Aguacate",
@@ -68,27 +70,27 @@ const ProductSearch = () => {
     url.searchParams.delete("hierarchy");
     window.history.pushState({}, "", url);
   };
-
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
     console.log(e.target.value);
   };
-
   const handleCountrySelect = (country) => {
     setSelectedCountry(country);
   };
-
   const handleCultivationSelect = (items) => {
     setSelectedCultivations(items);
   };
-
   const handleIconClick = (hierarchy) => {
-    console.log(`Icon clicked: ${hierarchy}`);
+    console.log(
+      `Icon clicked: ${hierarchy}, Normalized: ${normalizeString(hierarchy)}`
+    );
     setSelectedHierarchy(hierarchy);
     const url = new URL(window.location);
     url.searchParams.set("hierarchy", hierarchy);
     window.history.pushState({}, "", url);
   };
+
+  const handleCompSearch = () => {};
 
   // Función para filtrar productos
   const filteredProducts = productsData.filter((product) => {
@@ -117,10 +119,11 @@ const ProductSearch = () => {
             product.cultivation.includes(cultivation)
           )
         : true;
+
     const matchesHierarchy = selectedHierarchy
-      ? product.hierarchy
-          .toLowerCase()
-          .includes(selectedHierarchy.toLowerCase())
+      ? normalizeString(product.hierarchy).includes(
+          normalizeString(selectedHierarchy)
+        )
       : true;
 
     return (
@@ -160,6 +163,13 @@ const ProductSearch = () => {
           value={searchTerm}
           onChange={handleSearch}
         />
+        <IconsContainer>
+          <ComponentsToSearch
+            title="Nitrógeno"
+            letter="N"
+            onClick={handleCompSearch("Nitrógeno")}
+          />
+        </IconsContainer>
       </TopContainer>
       <BottomContainer>
         <FilterContainer>
@@ -182,6 +192,7 @@ const ProductSearch = () => {
         </FilterContainer>
         <ProductList products={filteredProducts} />
       </BottomContainer>
+      <ContactCard title="¿Te interesa algún producto?" />
       <Footer />
     </Container>
   );
