@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import styled from "styled-components";
 import normalizeString from "../utils/StringNormalization";
 import Icon from "../components/IconsForSearch";
@@ -9,12 +9,9 @@ import searchIcon from "../assets/search-icon.png";
 import ContactCard from "../components/ContactCard";
 import ComponentsToSearch from "../components/ComponentToSearch";
 import Footer from "../components/Footer";
-import { ReactComponent as Bioestimulantes } from "../assets/bioestimulantes.svg";
 import { ReactComponent as Edaficos } from "../assets/edaficos.svg";
 import { ReactComponent as Foliares } from "../assets/foliares.svg";
-import { ReactComponent as Fertirrigacion } from "../assets/fertirrigacion.svg";
 import { ReactComponent as Solubles } from "../assets/coadyuvantes.svg";
-import { ReactComponent as Sustratos } from "../assets/sustratos.svg";
 import productsData from "../data/newProducts"; //Copia de prueba de productos
 
 const ProductSearch = () => {
@@ -22,15 +19,23 @@ const ProductSearch = () => {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedCultivations, setSelectedCultivations] = useState([]);
   const [selectedHierarchy, setSelectedHierarchy] = useState("");
+  const [selectedComponent, setSelectedComponent] = useState("");
 
-  // Sync hierarchy filter with URL
+  // Leer parámetros de la URL al montar el componente
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const hierarchy = urlParams.get("hierarchy");
+    const component = urlParams.get("component");
+
     if (hierarchy) {
       setSelectedHierarchy(hierarchy);
     }
+
+    if (component) {
+      setSelectedComponent(component);
+    }
   }, []);
+
   const countries = ["Colombia", "Perú", "Bolivia", "Argentina", "Chile"];
   const cultivation = [
     "Aguacate",
@@ -59,86 +64,103 @@ const ProductSearch = () => {
     "Cultivos en desarrollo",
     "Cultivos en etapa de producción",
   ];
+
   const handleResetFilters = () => {
     setSearchTerm("");
     setSelectedCountry("");
     setSelectedCultivations([]);
     setSelectedHierarchy("");
+    setSelectedComponent("");
 
-    // Limpiar los parámetros de la URL
     const url = new URL(window.location);
     url.searchParams.delete("hierarchy");
+    url.searchParams.delete("component");
     window.history.pushState({}, "", url);
   };
+
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
-    console.log(e.target.value);
   };
+
   const handleCountrySelect = (country) => {
     setSelectedCountry(country);
   };
+
   const handleCultivationSelect = (items) => {
     setSelectedCultivations(items);
   };
+
   const handleIconClick = (hierarchy) => {
-    console.log(
-      `Icon clicked: ${hierarchy}, Normalized: ${normalizeString(hierarchy)}`
-    );
     setSelectedHierarchy(hierarchy);
     const url = new URL(window.location);
     url.searchParams.set("hierarchy", hierarchy);
     window.history.pushState({}, "", url);
   };
 
-  const handleCompSearch = () => {};
+  const handleCompSearch = (component) => {
+    setSelectedComponent(component);
+    const url = new URL(window.location);
+    url.searchParams.set("component", component);
+    window.history.pushState({}, "", url);
+  };
 
-  // Función para filtrar productos
-  const filteredProducts = productsData.filter((product) => {
-    if (
-      searchTerm === "" &&
-      selectedCountry === "" &&
-      selectedCultivations.length === 0 &&
-      selectedHierarchy === ""
-    )
-      return productsData;
+  // Filtrar productos usando useMemo para evitar recalculaciones innecesarias
+  const filteredProducts = useMemo(() => {
+    return productsData.filter((product) => {
+      const matchesDescription = searchTerm
+        ? product.description
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+          Object.values(product.composition)
+            .join(" ")
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+          product.name.toLowerCase().includes(searchTerm.toLowerCase())
+        : true;
 
-    const matchesDescription = searchTerm
-      ? product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        Object.values(product.composition)
-          .join(" ")
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase()) ||
-        product.name.toLowerCase().includes(searchTerm.toLowerCase())
-      : true;
-    const matchesCountry = selectedCountry
-      ? product.countries.includes(selectedCountry)
-      : true;
-    const matchesCultivation =
-      selectedCultivations.length > 0
-        ? selectedCultivations.some((cultivation) =>
-            product.cultivation.includes(cultivation)
+      const matchesCountry = selectedCountry
+        ? product.countries.includes(selectedCountry)
+        : true;
+
+      const matchesCultivation =
+        selectedCultivations.length > 0
+          ? selectedCultivations.some((cultivation) =>
+              product.cultivation.includes(cultivation)
+            )
+          : true;
+
+      const matchesHierarchy = selectedHierarchy
+        ? normalizeString(product.hierarchy).includes(
+            normalizeString(selectedHierarchy)
           )
         : true;
 
-    const matchesHierarchy = selectedHierarchy
-      ? normalizeString(product.hierarchy).includes(
-          normalizeString(selectedHierarchy)
-        )
-      : true;
+      const matchesComponent = selectedComponent
+        ? Object.keys(product.composition).some((comp) =>
+            normalizeString(comp).includes(normalizeString(selectedComponent))
+          )
+        : true;
 
-    return (
-      matchesDescription &&
-      matchesCountry &&
-      matchesCultivation &&
-      matchesHierarchy
-    );
-  });
+      return (
+        matchesDescription &&
+        matchesCountry &&
+        matchesCultivation &&
+        matchesHierarchy &&
+        matchesComponent
+      );
+    });
+  }, [
+    searchTerm,
+    selectedCountry,
+    selectedCultivations,
+    selectedHierarchy,
+    selectedComponent,
+  ]);
 
   return (
     <Container>
       <TopContainer>
         <IconsContainer>
-          {/* <Icon svg={<Bioestimulantes />} title="Bioestimulantes" /> */}
           <Icon
             svg={<Edaficos />}
             title="Edáficos"
@@ -149,13 +171,11 @@ const ProductSearch = () => {
             title="Foliares"
             onClick={() => handleIconClick("foliar")}
           />
-          {/* <Icon svg={<Fertirrigacion />} title="Fertirrigación" /> */}
           <Icon
             svg={<Solubles />}
-            title="Solubles"
-            onClick={() => handleIconClick("soluble")}
+            title="Mezclas"
+            onClick={() => handleIconClick("mezcla")}
           />
-          {/* <Icon svg={<Sustratos />} title="Sustratos" /> */}
         </IconsContainer>
         <Input
           type="text"
@@ -167,7 +187,27 @@ const ProductSearch = () => {
           <ComponentsToSearch
             title="Nitrógeno"
             letter="N"
-            onClick={handleCompSearch("Nitrógeno")}
+            onClick={() => handleCompSearch("Nitrógeno")}
+          />
+          <ComponentsToSearch
+            title="Fósforo"
+            letter="P"
+            onClick={() => handleCompSearch("Fósforo")}
+          />
+          <ComponentsToSearch
+            title="Potasio"
+            letter="K"
+            onClick={() => handleCompSearch("Potasio")}
+          />
+          <ComponentsToSearch
+            title="Calcio"
+            letter="Ca"
+            onClick={() => handleCompSearch("Calcio")}
+          />
+          <ComponentsToSearch
+            title="Magnesio"
+            letter="Mg"
+            onClick={() => handleCompSearch("Magnesio")}
           />
         </IconsContainer>
       </TopContainer>
@@ -197,6 +237,7 @@ const ProductSearch = () => {
     </Container>
   );
 };
+
 const ResetButton = styled.button`
   background-color: ${(props) => props.theme.colors.red};
   color: ${(props) => props.theme.colors.primary};

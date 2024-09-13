@@ -68,6 +68,7 @@ const Item = styled.div`
   h2 {
     font-size: 18px;
     font-weight: normal;
+    max-width: 150px;
   }
   img {
     width: 150px;

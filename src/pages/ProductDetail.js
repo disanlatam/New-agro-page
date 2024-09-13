@@ -1,6 +1,6 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-import products from "../data/products";
+import { useParams, Link } from "react-router-dom";
+import products from "../data/newProducts";
 import styled from "styled-components";
 import ProductSearch from "../components/ProductSearchBar";
 import { BsWhatsapp, BsDownload } from "react-icons/bs";
@@ -11,8 +11,28 @@ const ProductDetail = () => {
   const { productName } = useParams();
   const product = products.find((p) => p.name === productName);
 
+  const handleImageError = (event) => {
+    event.target.src = "../productsImg/patentkali.png"; // Reemplaza con la ruta correcta de la imagen de patentkali
+  };
+
   if (!product) {
     return <div>Producto no encontrado</div>;
+  }
+
+  // Filtrar productos relacionados
+  let relatedProducts = products.filter(
+    (p) => p.hierarchy === product.hierarchy && p.name !== product.name
+  );
+
+  // Si hay menos de 6 productos relacionados, completar con productos aleatorios
+  if (relatedProducts.length < 6) {
+    const remainingCount = 6 - relatedProducts.length;
+    const randomProducts = products
+      .filter((p) => p.name !== product.name && !relatedProducts.includes(p))
+      .sort(() => 0.5 - Math.random())
+      .slice(0, remainingCount);
+
+    relatedProducts = [...relatedProducts, ...randomProducts];
   }
 
   return (
@@ -20,10 +40,31 @@ const ProductDetail = () => {
       <ProductSearch />
       <DescriptionContainer>
         <Top>
-          <img src={"../" + product.image} alt={product.name} />
-          <div className="side">
-            <h1>{product.name}</h1>
+          <LeftSide>
+            <h2>{product.name}</h2>
             <p>{product.description}</p>
+            <img
+              src={"../" + product.image}
+              alt={product.name}
+              onError={handleImageError}
+            />
+          </LeftSide>
+
+          <RightSide>
+            <Composition>
+              <h2>Composición</h2>
+              <CompCard>
+                {Object.entries(product.composition).map(
+                  ([key, value], index) => (
+                    <p key={index}>
+                      {key.replace(/_/g, " ")}: <b>{value}</b>
+                    </p>
+                  )
+                )}
+              </CompCard>
+            </Composition>
+            <h4>Proveedor</h4>
+            <p>{product.supplier}</p>
             <div className="links">
               <div className="link">
                 <h4>¿Te interesa?</h4>
@@ -40,7 +81,7 @@ const ProductDetail = () => {
                 </DownloadButton>
               </div>
             </div>
-          </div>
+          </RightSide>
         </Top>
         <Bottom>
           <div className="left">
@@ -48,18 +89,6 @@ const ProductDetail = () => {
             <p>{product.benefits}</p>
           </div>
           <div>
-            <Composition>
-              <h2>Composición</h2>
-              <CompCard>
-                {Object.entries(product.composition).map(
-                  ([key, value], index) => (
-                    <p key={index}>
-                      {key.replace(/_/g, " ")}: <b>{value}</b>
-                    </p>
-                  )
-                )}
-              </CompCard>
-            </Composition>
             <div>
               <h2>Cultivos</h2>
               <BulletContainer>
@@ -68,25 +97,43 @@ const ProductDetail = () => {
                 ))}
               </BulletContainer>
             </div>
-            <div>
-              <h2>Proveedor</h2>
-              <p>product.supplier</p>
-            </div>
+            <div></div>
           </div>
         </Bottom>
-        {/* <p>{product.composition}</p> */}
+        <ContactCard title="¿Te interesa este producto?" />
+        <RelatedProducts>
+          <h2>
+            <b>PRODUCTOS</b> RELACIONADOS
+          </h2>
+          <RelatedProductsList>
+            {relatedProducts.map((relatedProduct) => (
+              <RelatedProductItem key={relatedProduct.name}>
+                <Link to={`/product/${relatedProduct.name}`}>
+                  <img
+                    src={"../" + relatedProduct.image}
+                    alt={relatedProduct.name}
+                    onError={handleImageError}
+                  />
+                  <p>{relatedProduct.name}</p>
+                </Link>
+              </RelatedProductItem>
+            ))}
+          </RelatedProductsList>
+        </RelatedProducts>
       </DescriptionContainer>
-      <ContactCard title="¿Te interesa este producto?" />
-      <RelatedProducts>
-        <h2>
-          <b>PRODUCTOS</b> RELACIONADOS
-        </h2>
-      </RelatedProducts>
       <Footer />
     </Container>
   );
 };
 
+const LeftSide = styled.div`
+  p {
+    max-width: 350px;
+  }
+`;
+const RightSide = styled.div`
+  min-width: 300px;
+`;
 const RelatedProducts = styled.div`
   width: 100%;
   padding: 5% 10%;
@@ -99,12 +146,44 @@ const RelatedProducts = styled.div`
   }
 `;
 
+const RelatedProductsList = styled.div`
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+`;
+
+const RelatedProductItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 180px; /* Aumentar el tamaño del contenedor */
+  text-align: center;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  img {
+    width: 100%;
+    max-width: 140px; /* Aumentar el tamaño de la imagen */
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: ${(props) => props.theme.fontSizes.small};
+    color: ${(props) => props.theme.colors.primary};
+  }
+`;
+
 const Composition = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  aling-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
 `;
+
 const CompCard = styled.div`
   margin-top: 10px;
   align-self: center;
@@ -130,9 +209,6 @@ const BulletContainer = styled.div`
   justify-content: center;
   gap: 5px;
   width: 300px;
-  h4{
-   margin
-  }
 `;
 
 const Bullet = styled.button`
@@ -149,6 +225,7 @@ const Bullet = styled.button`
     background-color: ${(props) => props.theme.colors.yellow};
   }
 `;
+
 const DownloadButton = styled.div`
   background-color: ${(props) => props.theme.colors.white};
   color: ${(props) => props.theme.colors.green};
@@ -158,6 +235,7 @@ const DownloadButton = styled.div`
   max-width: 150px;
   display: flex;
   justify-content: center;
+  padding: 9px 9px !important;
   align-items: center;
   border: 2px solid ${(props) => props.theme.colors.green};
   gap: 5px;
@@ -172,6 +250,7 @@ const DownloadButton = styled.div`
     }
   }
 `;
+
 const ContactButton = styled.div`
   background-color: ${(props) => props.theme.colors.green};
   color: white;
@@ -181,6 +260,7 @@ const ContactButton = styled.div`
   max-width: 150px;
   display: flex;
   justify-content: center;
+  padding: 10px 10px !important;
   align-items: center;
   gap: 5px;
 
@@ -194,31 +274,29 @@ const ContactButton = styled.div`
     }
   }
 `;
+
 const Bottom = styled.div`
   display: flex;
   width: 100%;
   max-width: 70vw;
 `;
+
 const Top = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 20px;
-
-  .side {
-    max-width: 500px;
-    .links {
-      display: flex;
-      gap: 10px;
+  .links {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: space-between;
+    .link {
       width: 100%;
-      justify-content: space-between;
-      .link {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
   }
   img {
@@ -227,6 +305,7 @@ const Top = styled.div`
     height: auto;
   }
 `;
+
 const DescriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -237,11 +316,12 @@ const DescriptionContainer = styled.div`
     padding: 2% 2%;
   }
 `;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   color: ${(props) => props.theme.colors.primary};
   * {
   }
@@ -250,4 +330,5 @@ const Container = styled.div`
     font-weight: 400;
   }
 `;
+
 export default ProductDetail;
