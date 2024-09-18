@@ -4,6 +4,7 @@ import bannerImage from "../assets/nosotros/fondo nosotros.png";
 import ColorTab from "../components/colorTab";
 import seedIcon from "../assets/nosotros/Icon seed.png";
 import seedsIcon from "../assets/nosotros/icons seeds.png";
+import Footer from "../components/Footer";
 
 const AboutContainer = styled.div`
   display: flex;
@@ -56,7 +57,7 @@ const PilaresSection = styled.div`
   max-width: 90vw;
   color: ${(props) => props.theme.colors.primary};
   padding: 5% 10%;
-
+  margin-bottom: 5%;
   span {
     color: ${(props) => props.theme.colors.green};
   }
@@ -156,6 +157,7 @@ const About = () => {
           </Pilar>
         </PilarContainer>
       </PilaresSection>
+      <Footer />
     </AboutContainer>
   );
 };
