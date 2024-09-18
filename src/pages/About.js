@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import bannerImage from "../assets/nosotros/fondo nosotros.png";
 import ColorTab from "../components/colorTab";
+import seedIcon from "../assets/nosotros/Icon seed.png";
+import seedsIcon from "../assets/nosotros/icons seeds.png";
 
 const AboutContainer = styled.div`
   display: flex;
@@ -46,6 +48,7 @@ const PilaresSection = styled.div`
   margin-top: 5%;
   position: relative;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   width: 100%;
   border: 1px solid ${(props) => props.theme.colors.secondary};
@@ -61,6 +64,7 @@ const PilaresSection = styled.div`
 
 const PilarContainer = styled.div`
   display: flex;
+  gap: 20px;
   @media (max-width: 768px) {
     flex-direction: column;
   }
@@ -68,7 +72,30 @@ const PilarContainer = styled.div`
 
 const Pilar = styled.div`
   display: flex;
-  background-color: ${(props) => props.theme.colors.yellow};
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 5px;
+  .icon-container {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .description {
+    background-color: ${(props) => props.theme.colors.yellow};
+    color: white;
+    border-radius: 20px;
+    padding: 5% 10%;
+  }
+`;
+
+const Icon = styled.img`
+  width: 100%;
+  height: auto;
+  max-width: 100px;
 `;
 const About = () => {
   return (
@@ -102,9 +129,31 @@ const About = () => {
         </h2>
         <PilarContainer>
           <Pilar>
-            <Icon src={icon} alt="Icon" />
+            <div className="icon-container">
+              <Icon src={seedIcon} alt="Icon" />
+            </div>
+            <h3>Mitigación de impactos ambientales</h3>
+            <div className="description">
+              <ul>
+                <li>Salud del suelo</li>
+                <li>Disan Siembra</li>
+                <li>Balance de materiales</li>
+              </ul>
+            </div>
           </Pilar>
-          <Pilar></Pilar>
+          <Pilar>
+            <div className="icon-container">
+              <Icon src={seedsIcon} alt="Icon" />
+            </div>
+            <h3>Mitigación de impactos ambientales</h3>
+            <div className="description">
+              <ul>
+                <li>Salud del suelo</li>
+                <li>Disan Siembra</li>
+                <li>Balance de materiales</li>
+              </ul>
+            </div>
+          </Pilar>
         </PilarContainer>
       </PilaresSection>
     </AboutContainer>
