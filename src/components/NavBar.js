@@ -190,7 +190,7 @@ const NavBar = () => {
 
       <LinksContainer>
         <NavLink
-          to="/nosotros"
+          to="/about-us"
           onClick={() => handleLinkClick("/nosotros")}
           className={activeLink === "/nosotros" ? "active" : ""}
         >

@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import ProductDetail from "./pages/ProductDetail";
 import ProductSearch from "./pages/ProductSearch";
+import About from "./pages/About";
 
 function App() {
   const location = useLocation();
@@ -28,6 +29,19 @@ function App() {
                 transition={{ duration: 0.3 }}
               >
                 <Home />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/about-us"
+            element={
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <About />
               </motion.div>
             }
           />
