@@ -27,6 +27,21 @@ const GlobalStyle = createGlobalStyle`
       box-shadow: none; /* Elimina la sombra del cuadro */
     }
   }
+
+  .card-container{
+    display: flex;
+    gap: 20px;
+    max-width: 70vw;
+    width: 100%;
+    @media (max-width: 768px) {
+      flex-direction: column;
+      max-width: 90vw;
+    }
+  }
+
+  .top-bar{
+   position: relative;
+  }
 `;
 
 export default GlobalStyle;

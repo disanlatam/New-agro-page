@@ -12,7 +12,7 @@ export const theme = {
   fontSizes: {
     small: "12px",
     medium: "16px",
-    normal: "18px",
+    normal: "24px",
     large: "28px",
     xlarge: "32px",
     xxlarge: "48px",
