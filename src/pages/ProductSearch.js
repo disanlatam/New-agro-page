@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useMemo } from "react";
 import styled from "styled-components";
 import normalizeString from "../utils/StringNormalization";
-import Icon from "../components/IconsForSearch";
 import Dropdown from "../components/dropDownMenu";
 import BulletList from "../components/bulletList";
 import ProductList from "../components/ProductList";
 import searchIcon from "../assets/search-icon.png";
 import ContactCard from "../components/ContactCard";
-import ComponentsToSearch from "../components/ComponentToSearch";
 import Footer from "../components/Footer";
 import { ReactComponent as Edaficos } from "../assets/edaficos.svg";
 import { ReactComponent as Foliares } from "../assets/foliares.svg";
@@ -65,6 +63,8 @@ const ProductSearch = () => {
     "Cultivos en etapa de producción",
   ];
 
+  const components = ["Nitrógeno", "Fósforo", "Potasio", "Calcio", "Magnesio"]; // Agregar opciones de componentes
+
   const handleResetFilters = () => {
     setSearchTerm("");
     setSelectedCountry("");
@@ -97,7 +97,7 @@ const ProductSearch = () => {
     window.history.pushState({}, "", url);
   };
 
-  const handleCompSearch = (component) => {
+  const handleComponentSelect = (component) => {
     setSelectedComponent(component);
     const url = new URL(window.location);
     url.searchParams.set("component", component);
@@ -160,56 +160,12 @@ const ProductSearch = () => {
   return (
     <Container>
       <TopContainer>
-        <IconsContainer>
-          <Icon
-            svg={<Edaficos />}
-            title="Edáficos"
-            onClick={() => handleIconClick("edáfico")}
-          />
-          <Icon
-            svg={<Foliares />}
-            title="Foliares"
-            onClick={() => handleIconClick("foliar")}
-          />
-          <Icon
-            svg={<Solubles />}
-            title="Mezclas"
-            onClick={() => handleIconClick("mezcla")}
-          />
-        </IconsContainer>
         <Input
           type="text"
           placeholder="Buscar producto o nutriente"
           value={searchTerm}
           onChange={handleSearch}
         />
-        <IconsContainer>
-          <ComponentsToSearch
-            title="Nitrógeno"
-            letter="N"
-            onClick={() => handleCompSearch("Nitrógeno")}
-          />
-          <ComponentsToSearch
-            title="Fósforo"
-            letter="P"
-            onClick={() => handleCompSearch("Fósforo")}
-          />
-          <ComponentsToSearch
-            title="Potasio"
-            letter="K"
-            onClick={() => handleCompSearch("Potasio")}
-          />
-          <ComponentsToSearch
-            title="Calcio"
-            letter="Ca"
-            onClick={() => handleCompSearch("Calcio")}
-          />
-          <ComponentsToSearch
-            title="Magnesio"
-            letter="Mg"
-            onClick={() => handleCompSearch("Magnesio")}
-          />
-        </IconsContainer>
       </TopContainer>
       <BottomContainer>
         <FilterContainer>
@@ -225,6 +181,13 @@ const ProductSearch = () => {
             onSelect={handleCultivationSelect}
             maxVisible={5}
             showMoreText={"Más cultivos..."}
+          />
+          {/* Nuevo Dropdown para los componentes */}
+          <Dropdown
+            items={components}
+            title={"Componente"}
+            onSelect={handleComponentSelect}
+            placeholder={"Seleccionar Componente"}
           />
           <ResetButton onClick={handleResetFilters}>
             Reiniciar Filtros
@@ -285,21 +248,6 @@ const BottomContainer = styled.div`
 
   @media (min-width: 768px) {
     flex-direction: row;
-  }
-`;
-
-const IconsContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: 1rem;
-  gap: 1rem;
-  max-width: 70vw;
-  @media (min-width: 768px) {
-    justify-content: center;
-    gap: 50px;
-    width: 100%;
   }
 `;
 
