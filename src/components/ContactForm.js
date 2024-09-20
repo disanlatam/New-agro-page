@@ -18,6 +18,10 @@ const FormContainer = styled.div`
   @media (min-width: 768px) {
     max-width: 50vw;
   }
+
+  h2 {
+    padding: 0px !important;
+  }
 `;
 
 const Form = styled.form`

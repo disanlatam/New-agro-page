@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
@@ -7,8 +7,8 @@ const pageVariants = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0, transition: { duration: 0.3 } },
   exit: { opacity: 0, y: -20, transition: { duration: 0.3 } },
-  transition: { duration: 0.3 },
 };
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -22,12 +22,14 @@ const Container = styled.div`
     text-align: left;
   }
 `;
+
 const Pagination = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
   gap: 20px;
 `;
+
 const PageButton = styled.button`
   background-color: ${(props) => props.theme.colors.green};
   color: ${(props) => props.theme.colors.white};
@@ -50,6 +52,7 @@ const PageButton = styled.button`
     outline: none;
   }
 `;
+
 const List = styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
@@ -85,6 +88,15 @@ const ProductsList = ({ products }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
+  // Estado para manejar la clave única cuando se actualicen los productos o se cambie de página
+  const [listKey, setListKey] = useState(0);
+
+  useEffect(() => {
+    // Cuando cambian los productos, se actualiza la clave del listado para reiniciar la animación
+    setListKey((prevKey) => prevKey + 1);
+    setCurrentPage(1); // Resetear la página a 1 cuando se aplican filtros
+  }, [products]);
+
   // Calcular el índice de los productos a mostrar en la página actual
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -93,14 +105,22 @@ const ProductsList = ({ products }) => {
   // Manejar cambio de página hacia adelante
   const handleNextPage = () => {
     if (currentPage < Math.ceil(products.length / itemsPerPage)) {
-      setCurrentPage(currentPage + 1);
+      setCurrentPage((prevPage) => {
+        const newPage = prevPage + 1;
+        setListKey((prevKey) => prevKey + 1); // Actualiza la clave para forzar la animación
+        return newPage;
+      });
     }
   };
 
   // Manejar cambio de página hacia atrás
   const handlePreviousPage = () => {
     if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
+      setCurrentPage((prevPage) => {
+        const newPage = prevPage - 1;
+        setListKey((prevKey) => prevKey + 1); // Actualiza la clave para forzar la animación
+        return newPage;
+      });
     }
   };
 
@@ -116,7 +136,7 @@ const ProductsList = ({ products }) => {
       </h1>
       <AnimatePresence mode="wait">
         <List
-          key={currentPage}
+          key={listKey} // Cambia la clave cuando los productos o la página se actualicen
           variants={pageVariants}
           initial="initial"
           animate="animate"

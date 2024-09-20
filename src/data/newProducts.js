@@ -25,7 +25,7 @@ const products = [
     hierarchy: "Edáficos - Acondicionadores del suelo",
     supplier: "DISAN",
     countries: ["Colombia", "Ecuador", "Panamá"],
-    image: "productsImg/Oxical Mg.png",
+    image: "productsImg/oxical-mg.png",
   },
   {
     name: "Equilibrio Pentax",
@@ -191,7 +191,7 @@ const products = [
     hierarchy: "Edáficos - Fósforo",
     supplier: "DISAN",
     countries: ["Perú", "Panamá", "Ecuador"],
-    image: "productsImg/MAP AVAIL.png",
+    image: "productsImg/mapavail.png",
   },
   {
     name: "Solufos 44 GR",
@@ -709,7 +709,7 @@ const products = [
     hierarchy: "Edáficos - Mezclas Físicas NPK",
     supplier: "DISAN",
     countries: ["Perú", "Colombia", "Bolivia"],
-    image: "productsImg/Arábigo.png",
+    image: "productsImg/Arabigo.png",
   },
   {
     name: "Disan balance",
@@ -1119,27 +1119,6 @@ const products = [
     supplier: "DISAN",
     countries: ["Colombia", "Ecuador", "Panamá"],
     image: "productsImg/Disan Factor.png",
-  },
-  {
-    name: "Arábigo",
-    description:
-      "Mezcla física NPK con alto contenido de nitrógeno y potasio. Tomando como fuente de nitrógeno UREA NUTRISPHERE. Aporta magnesio, calcio y azufre; ideal para mejorar la producción de café.",
-    benefits:
-      "Fertilizante con alto aporte de nitrógeno recubierto y en menor proporción de potasio, ideal etapas de desarrollo previas a la producción. Aporte de elementos secundarios como magnesio y azufre para una nutrición balanceada en su cultivo de café.",
-    composition: {
-      "Nitrógeno total (N)": "23.0%",
-      "Nitrógeno amoniacal (NH4)": "1.0%",
-      "Nitrógeno ureico (NH2)": "22.0%",
-      "Fósforo asimilable (P2O5)": "4.0%",
-      "Potasio soluble en agua (K2O)": "21.0%",
-      "Magnesio total (MgO)": "2.0%",
-      "Azufre total (S)": "2.0%",
-    },
-    cultivation: ["Café"],
-    hierarchy: "Edáficos - Mezclas Físicas NPK",
-    supplier: "DISAN",
-    countries: ["Perú", "Colombia", "Bolivia"],
-    image: "productsImg/Arábigo.png",
   },
 ];
 

@@ -41,28 +41,11 @@ const ProductDetail = () => {
       <DescriptionContainer>
         <Top>
           <LeftSide>
-            <h2>{product.name}</h2>
-            <p>{product.description}</p>
             <img
               src={"../" + product.image}
               alt={product.name}
               onError={handleImageError}
             />
-          </LeftSide>
-
-          <RightSide>
-            <Composition>
-              <h2>Composición</h2>
-              <CompCard>
-                {Object.entries(product.composition).map(
-                  ([key, value], index) => (
-                    <p key={index}>
-                      {key.replace(/_/g, " ")}: <b>{value}</b>
-                    </p>
-                  )
-                )}
-              </CompCard>
-            </Composition>
             <h4>Proveedor</h4>
             <p>{product.supplier}</p>
             <div className="links">
@@ -81,22 +64,47 @@ const ProductDetail = () => {
                 </DownloadButton>
               </div>
             </div>
+          </LeftSide>
+
+          <RightSide>
+            <Composition>
+              <div className="top">
+                <div className="tile">
+                  <h2>{product.name}</h2>
+                  <div className="product-desc">
+                    <p>{product.description}</p>
+                  </div>
+                </div>
+                <div className="tile">
+                  <h2>Composición</h2>
+                  <CompCard>
+                    {Object.entries(product.composition).map(
+                      ([key, value], index) => (
+                        <p key={index}>
+                          {key.replace(/_/g, " ")}: <b>{value}</b>
+                        </p>
+                      )
+                    )}
+                  </CompCard>
+                </div>
+              </div>
+              <div className="benefits">
+                <h2>Beneficios</h2>
+                <p>{product.benefits}</p>
+              </div>
+              <div>
+                <h2>Cultivos</h2>
+                <BulletContainer>
+                  {product.cultivation.map((item) => (
+                    <Bullet key={item}>{item}</Bullet>
+                  ))}
+                </BulletContainer>
+              </div>
+            </Composition>
           </RightSide>
         </Top>
         <Bottom>
-          <div className="left">
-            <h2>Beneficios</h2>
-            <p>{product.benefits}</p>
-          </div>
           <div>
-            <div>
-              <h2>Cultivos</h2>
-              <BulletContainer>
-                {product.cultivation.map((item) => (
-                  <Bullet key={item}>{item}</Bullet>
-                ))}
-              </BulletContainer>
-            </div>
             <div></div>
           </div>
         </Bottom>
@@ -127,12 +135,23 @@ const ProductDetail = () => {
 };
 
 const LeftSide = styled.div`
-  p {
-    max-width: 350px;
+  width: 100%;
+  max-width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
   }
 `;
 const RightSide = styled.div`
-  min-width: 300px;
+  width: 100%;
+  max-width: 50%;
+  text-align: left;
 `;
 const RelatedProducts = styled.div`
   width: 100%;
@@ -182,11 +201,36 @@ const Composition = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+
+  .benefits {
+    margin-top: -20px;
+  }
+  .product-desc {
+    padding: 0px !important;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    height: 100%;
+    p {
+      text-align: left;
+      max-width: 80%;
+    }
+  }
+  .top {
+    display: flex;
+    .tile {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      gap: 10px;
+    }
+  }
 `;
 
 const CompCard = styled.div`
-  margin-top: 10px;
+  margin-top: 20px;
   align-self: center;
+  text-align: center;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -201,14 +245,18 @@ const CompCard = styled.div`
     rgba(215, 164, 69, 1) 50%,
     rgba(215, 164, 69, 0.4590628487723214) 100%
   );
+
+  p {
+    font-size: 14px;
+  }
 `;
 
 const BulletContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: left;
   gap: 5px;
-  width: 300px;
+  width: 100%;
 `;
 
 const Bullet = styled.button`
@@ -285,7 +333,6 @@ const Top = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 20px;
   .links {
     display: flex;
     gap: 10px;
