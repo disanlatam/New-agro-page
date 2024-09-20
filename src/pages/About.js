@@ -71,7 +71,7 @@ const PilaresSection = styled.div`
   width: 100%;
   border: 1px solid ${(props) => props.theme.colors.secondary};
   border-radius: 20px;
-  max-width: fit-content;
+  max-width: 90vw;
   color: ${(props) => props.theme.colors.primary};
   padding: 5% 10%;
   margin-bottom: 5%;
@@ -127,14 +127,64 @@ const PromesasSection = styled.div`
   display: flex;
   text-align: left;
   .left {
+    border-right: 1px solid ${(props) => props.theme.colors.secondary};
+    max-width: 50%;
+    padding-right: 5%;
+    h3 {
+      font-size: ${(props) => props.theme.fontSizes.medium} !important;
+      margin-bottom: 2%;
+      @media (max-width: 768px) {
+        margin-top: 10%;
+      }
+    }
+    h3:not(:first-child) {
+      margin-top: 10%;
+    }
+    @media (max-width: 768px) {
+      border-right: none;
+      max-width: 100%;
+    }
+  }
+  .rigth {
+    padding-left: 5%;
+    max-width: 50%;
+    h3 {
+      font-size: ${(props) => props.theme.fontSizes.medium} !important;
+      margin-bottom: 2%;
+      @media (max-width: 768px) {
+        margin-top: 10%;
+      }
+    }
+    h3:not(:first-child) {
+      margin-top: 10%;
+    }
+    @media (max-width: 768px) {
+      max-width: 100%;
+    }
   }
   .description {
+    font-size: ${(props) => props.theme.fontSizes.small};
     display: flex;
+    gap: 20px;
+    height: 100%;
+    max-height: 40%;
     img {
-      width: 100px;
-      max-width: 100px;
-      height: auto;
+      width: 150px;
+      height: 150px;
+      margin-top: 1%;
     }
+    @media (max-width: 768px) {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
 `;
 const About = () => {
@@ -205,7 +255,7 @@ const About = () => {
           <div className="left">
             <h3>RELACIONAMIENTO DE LARGO PLAZO</h3>
             <div className="description">
-              <img src={relacionamiento} alt="" srcset="" />
+              <img src={relacionamiento} alt="Relacionamiento" />
               <p>
                 Identificamos y nos comprometemos con los propósitos de nuestros
                 clientes y proveedores, generamos y valoramos la confianza,
@@ -214,10 +264,45 @@ const About = () => {
                 nuestro negocio
               </p>
             </div>
+            <h3>ASESORÍA ESPECIALIZADA</h3>
+            <div className="description">
+              <img src={asesoria} alt="Asesoria" />
+              <p>
+                Desarrollamos redes de conocimiento con diferentes actores de
+                las cadenas agrícolas y agroindustriales que nos permiten
+                mantenernos actualizados respecto a las tendencias mundiales de
+                mercado, consumo, innovación técnica/tecnológica y normatividad
+                para poder ofrecer un acompañamiento integral
+              </p>
+            </div>
+          </div>
+          <div className="rigth">
+            <h3>SOLUCIONES INTEGRALES PARA EL AGRO</h3>
+            <div className="description">
+              <img src={soluciones} alt="Soluciones" />
+              <p>
+                Nos esforzamos por mantener un portafolio de productos
+                innovadores, diversos y actualizados que nos permita participar
+                en las cadenas productivas, ofreciendo soluciones integrales que
+                garanticen la mejor relación costo/beneficio para nuestros
+                clientes
+              </p>
+            </div>
+            <h3>SUMINISTRO CONFIABLE</h3>
+            <div className="description">
+              <img src={suministro} alt="Suministro" />
+              <p>
+                Garantizamos el cumplimiento de las necesidades de
+                aprovisionamiento de nuestros clientes, sin importar su tamaño o
+                localización, manteniendo inventarios de producto suficientes, a
+                través del trabajo compartido con nuestros proveedores y
+                servicios de logística local e internacional
+              </p>
+            </div>
           </div>
         </PromesasSection>
       </PilaresSection>
-      <Footer />
+      {/* <Footer /> */}
     </AboutContainer>
   );
 };

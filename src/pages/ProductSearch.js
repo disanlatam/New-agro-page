@@ -179,7 +179,7 @@ const ProductSearch = () => {
         </IconsContainer>
         <Input
           type="text"
-          placeholder="Buscar Producto"
+          placeholder="Buscar producto o nutriente"
           value={searchTerm}
           onChange={handleSearch}
         />
