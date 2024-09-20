@@ -4,13 +4,14 @@ import normalizeString from "../utils/StringNormalization";
 import Dropdown from "../components/dropDownMenu";
 import BulletList from "../components/bulletList";
 import ProductList from "../components/ProductList";
+import Icon from "../components/IconsForSearch";
 import searchIcon from "../assets/search-icon.png";
 import ContactCard from "../components/ContactCard";
 import Footer from "../components/Footer";
 import { ReactComponent as Edaficos } from "../assets/edaficos.svg";
 import { ReactComponent as Foliares } from "../assets/foliares.svg";
-import { ReactComponent as Solubles } from "../assets/coadyuvantes.svg";
-import productsData from "../data/newProducts"; //Copia de prueba de productos
+import { ReactComponent as Solubles } from "../assets/coadyuvantes.svg"; // Ejemplos de íconos
+import productsData from "../data/newProducts"; // Copia de prueba de productos
 
 const ProductSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -24,6 +25,8 @@ const ProductSearch = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const hierarchy = urlParams.get("hierarchy");
     const component = urlParams.get("component");
+    const country = urlParams.get("country");
+    const cultivations = urlParams.getAll("cultivation"); // Array if multiple cultivation filters are applied
 
     if (hierarchy) {
       setSelectedHierarchy(hierarchy);
@@ -31,6 +34,14 @@ const ProductSearch = () => {
 
     if (component) {
       setSelectedComponent(component);
+    }
+
+    if (country) {
+      setSelectedCountry(country);
+    }
+
+    if (cultivations.length > 0) {
+      setSelectedCultivations(cultivations);
     }
   }, []);
 
@@ -63,7 +74,8 @@ const ProductSearch = () => {
     "Cultivos en etapa de producción",
   ];
 
-  const components = ["Nitrógeno", "Fósforo", "Potasio", "Calcio", "Magnesio"]; // Agregar opciones de componentes
+  // Definir la lista de componentes (nutrientes)
+  const components = ["Nitrógeno", "Fósforo", "Potasio", "Calcio", "Magnesio"]; // Nutrientes
 
   const handleResetFilters = () => {
     setSearchTerm("");
@@ -75,6 +87,8 @@ const ProductSearch = () => {
     const url = new URL(window.location);
     url.searchParams.delete("hierarchy");
     url.searchParams.delete("component");
+    url.searchParams.delete("country");
+    url.searchParams.delete("cultivation");
     window.history.pushState({}, "", url);
   };
 
@@ -84,10 +98,19 @@ const ProductSearch = () => {
 
   const handleCountrySelect = (country) => {
     setSelectedCountry(country);
+    const url = new URL(window.location);
+    url.searchParams.set("country", country);
+    window.history.pushState({}, "", url);
   };
 
   const handleCultivationSelect = (items) => {
     setSelectedCultivations(items);
+    const url = new URL(window.location);
+    url.searchParams.delete("cultivation");
+    items.forEach((cultivation) =>
+      url.searchParams.append("cultivation", cultivation)
+    );
+    window.history.pushState({}, "", url);
   };
 
   const handleIconClick = (hierarchy) => {
@@ -97,6 +120,7 @@ const ProductSearch = () => {
     window.history.pushState({}, "", url);
   };
 
+  // Manejar la selección de nutrientes (componentes)
   const handleComponentSelect = (component) => {
     setSelectedComponent(component);
     const url = new URL(window.location);
@@ -160,6 +184,26 @@ const ProductSearch = () => {
   return (
     <Container>
       <TopContainer>
+        <IconsContainer>
+          <Icon
+            svg={<Edaficos />}
+            title="Edáficos"
+            onClick={() => handleIconClick("edáfico")}
+            isActive={selectedHierarchy === "edáfico"}
+          />
+          <Icon
+            svg={<Foliares />}
+            title="Foliares"
+            onClick={() => handleIconClick("foliar")}
+            isActive={selectedHierarchy === "foliar"}
+          />
+          <Icon
+            svg={<Solubles />}
+            title="Mezclas"
+            onClick={() => handleIconClick("mezcla")}
+            isActive={selectedHierarchy === "mezcla"}
+          />
+        </IconsContainer>
         <Input
           type="text"
           placeholder="Buscar producto o nutriente"
@@ -169,11 +213,20 @@ const ProductSearch = () => {
       </TopContainer>
       <BottomContainer>
         <FilterContainer>
+          {/* Dropdown de Nutrientes */}
+          <Dropdown
+            items={components}
+            title={"Nutrientes"}
+            onSelect={handleComponentSelect}
+            placeholder={"Seleccionar Nutriente"}
+            selectedItem={selectedComponent} // Preseleccionado desde la URL
+          />
           <Dropdown
             items={countries}
             title={"País"}
             onSelect={handleCountrySelect}
             placeholder={"Todos los países"}
+            selectedItem={selectedCountry} // Preseleccionado desde la URL
           />
           <BulletList
             title={"Cultivos"}
@@ -181,13 +234,7 @@ const ProductSearch = () => {
             onSelect={handleCultivationSelect}
             maxVisible={5}
             showMoreText={"Más cultivos..."}
-          />
-          {/* Nuevo Dropdown para los componentes */}
-          <Dropdown
-            items={components}
-            title={"Componente"}
-            onSelect={handleComponentSelect}
-            placeholder={"Seleccionar Componente"}
+            selectedItems={selectedCultivations} // Preseleccionados desde la URL
           />
           <ResetButton onClick={handleResetFilters}>
             Reiniciar Filtros
@@ -248,6 +295,21 @@ const BottomContainer = styled.div`
 
   @media (min-width: 768px) {
     flex-direction: row;
+  }
+`;
+
+const IconsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  gap: 1rem;
+  max-width: 70vw;
+  @media (min-width: 768px) {
+    justify-content: center;
+    gap: 50px;
+    width: 100%;
   }
 `;
 

@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { motion, AnimatePresence } from "framer-motion"; // Importar framer-motion
 
 const BulletContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
   width: 200px;
-  h4{
-   margin
-  }
 `;
 
 const Bullet = styled.button`
@@ -56,19 +54,29 @@ const BulletFilter = ({ items, onSelect, maxVisible, showMoreText, title }) => {
     <div>
       <h4>{title}</h4>
       <BulletContainer>
-        {visibleItems.map((item) => (
-          <Bullet
-            key={item}
-            isActive={selectedItems.includes(item)}
-            onClick={() => handleToggleItem(item)}
-          >
-            {item}
-          </Bullet>
-        ))}
+        <AnimatePresence>
+          {visibleItems.map((item) => (
+            <motion.div
+              key={item}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Bullet
+                isActive={selectedItems.includes(item)}
+                onClick={() => handleToggleItem(item)}
+              >
+                {item}
+              </Bullet>
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </BulletContainer>
-      {items.length > maxVisible && !showAll && (
-        <ShowMoreButton onClick={() => setShowAll(true)}>
-          {showMoreText || "Ver más..."}
+
+      {items.length > maxVisible && (
+        <ShowMoreButton onClick={() => setShowAll(!showAll)}>
+          {showAll ? "Ver menos..." : showMoreText || "Ver más..."}
         </ShowMoreButton>
       )}
     </div>

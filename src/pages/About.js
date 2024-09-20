@@ -302,7 +302,7 @@ const About = () => {
           </div>
         </PromesasSection>
       </PilaresSection>
-      {/* <Footer /> */}
+      <Footer />
     </AboutContainer>
   );
 };
