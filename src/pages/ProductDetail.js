@@ -103,32 +103,27 @@ const ProductDetail = () => {
             </Composition>
           </RightSide>
         </Top>
-        <Bottom>
-          <div>
-            <div></div>
-          </div>
-        </Bottom>
-        <ContactCard title="¿Te interesa este producto?" />
-        <RelatedProducts>
-          <h2>
-            <b>PRODUCTOS</b> RELACIONADOS
-          </h2>
-          <RelatedProductsList>
-            {relatedProducts.map((relatedProduct) => (
-              <RelatedProductItem key={relatedProduct.name}>
-                <Link to={`/product/${relatedProduct.name}`}>
-                  <img
-                    src={"../" + relatedProduct.image}
-                    alt={relatedProduct.name}
-                    onError={handleImageError}
-                  />
-                  <p>{relatedProduct.name}</p>
-                </Link>
-              </RelatedProductItem>
-            ))}
-          </RelatedProductsList>
-        </RelatedProducts>
       </DescriptionContainer>
+      <ContactCard title="¿Te interesa este producto?" />
+      <RelatedProducts>
+        <h2>
+          <b>PRODUCTOS</b> RELACIONADOS
+        </h2>
+        <RelatedProductsList>
+          {relatedProducts.map((relatedProduct) => (
+            <RelatedProductItem key={relatedProduct.name}>
+              <Link to={`/product/${relatedProduct.name}`}>
+                <img
+                  src={"../" + relatedProduct.image}
+                  alt={relatedProduct.name}
+                  onError={handleImageError}
+                />
+                <p>{relatedProduct.name}</p>
+              </Link>
+            </RelatedProductItem>
+          ))}
+        </RelatedProductsList>
+      </RelatedProducts>
       <Footer />
     </Container>
   );
