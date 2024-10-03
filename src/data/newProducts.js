@@ -1120,6 +1120,202 @@ const products = [
     countries: ["Colombia", "Ecuador", "Panamá"],
     image: "productsImg/Disan Factor.png",
   },
+  {
+    name: "CTA-HUMUS NK",
+    description:
+      "Acondicionador orgánico húmico para aplicación al suelo, indicado para mejorar las condiciones de intercambio catiónico y optimizar la absorción de nutrientes.",
+    benefits:
+      "Acondicionador de suelos líquido rico en extracto húmico. Aporta al suelo tanto ácidos húmicos como ácidos fúlvicos por lo que mejora la estructura del suelo tanto de manera inmediata como a largo plazo.\nLa aplicación de CTA HUMUS mejora la estructura del suelo, aumentando la permeabilidad del suelo en terrenos compactos y la capacidad de retención de agua en terrenos arenosos.\nIncrementa la capacidad de intercambio catiónico, aumentando la disponibilidad de nutrientes para la planta y con ello obteniendo una mayor productividad.",
+    composition: {
+      "Nitrógeno total (N)": "7.0%",
+      "Nitrógeno amoniacal (NH4)": "7.0%",
+      "Fósforo asimilable (P2O5)": "35.0%",
+      "Potasio soluble en agua (K2O)": "12.0%",
+      "Magnesio total (MgO)": "2.0%",
+      "Azufre total (S)": "2.0%",
+    },
+    cultivation: [
+      "Hortalizas",
+      "Berries",
+      "Flores de Corte",
+      "Hornamentales",
+      "Papa",
+      "Frutales",
+      "Musáceas",
+    ],
+    hierarchy: "Solubles - Acondicionadores del suelo",
+    supplier: "",
+    countries: ["Colombia", "Ecuador"],
+    image: "productsImg/cta-humus_nk.png",
+  },
+  {
+    name: "Entec Solub 21",
+    description:
+      "Sulfato de Amonio de alta solubilidad con el polímero ENTEC que reduce las pérdidas del nitrógeno en el suelo, recomendado para fertilización en sistemas de fertirriego.",
+    benefits:
+      "Su rápida disolución en agua facilita la aplicación en sistemas de fertirriego, maximizando la eficiencia del uso de nutrientes.",
+    composition: {
+      "Nitrógeno total (N)": "7.0%",
+      "Nitrógeno amoniacal (NH4)": "7.0%",
+      "Fósforo asimilable (P2O5)": "35.0%",
+      "Potasio soluble en agua (K2O)": "12.0%",
+      "Magnesio total (MgO)": "2.0%",
+      "Azufre total (S)": "2.0%",
+    },
+    cultivation: [
+      "Hortalizas",
+      "Berries",
+      "Flores de Corte",
+      "Hornamentales",
+      "Papa",
+      "Frutales",
+      "Musáceas",
+    ],
+    hierarchy: "Solubles - Nitrógeno",
+    supplier: "",
+    countries: ["Colombia"],
+    image: "productsImg/entec_solub_21.png",
+  },
+  {
+    name: "Fosfato monopotásico",
+    description:
+      "Fertilizante con una concentración óptima de Fósforo y Potasio, especialmente desarrollado para promover la floración y formación de frutos.",
+    benefits:
+      "Este producto es una valiosa fuente de fósforo y potasio para las plantas, mejorando la formación de frutos, incrementando el tamaño y la calidad de los cultivos.",
+    composition: {
+      "Nitrógeno total (N)": "0.0%",
+      "Nitrógeno amoniacal (NH4)": "0.0%",
+      "Fósforo asimilable (P2O5)": "52.0%",
+      "Potasio soluble en agua (K2O)": "34.0%",
+      "Magnesio total (MgO)": "0.0%",
+      "Azufre total (S)": "0.0%",
+    },
+    cultivation: [
+      "Hortalizas",
+      "Berries",
+      "Flores de Corte",
+      "Hornamentales",
+      "Papa",
+      "Frutales",
+      "Musáceas",
+    ],
+    hierarchy: "Solubles - Fósforo",
+    supplier: "",
+    countries: ["Colombia", "Perú"],
+    image: "productsImg/fosfato_monopotasico.png",
+  },
+  {
+    name: "Solufos 44",
+    description:
+      "Fertilizante hidrosoluble, es la mezcla química de fosfato monoamónico y fosfato monoamónico.",
+    benefits:
+      "Fertilizantes complejo compuesto por Nitrógeno y Fósforo, fácil de disolver y aplicar en cultivos de ciclo corto y largo.",
+    composition: {
+      "Nitrógeno total (N)": "12.0%",
+      "Nitrógeno amoniacal (NH4)": "12.0%",
+      "Fósforo asimilable (P2O5)": "44.0%",
+      "Potasio soluble en agua (K2O)": "0.0%",
+      "Magnesio total (MgO)": "0.0%",
+      "Azufre total (S)": "0.0%",
+    },
+    cultivation: [
+      "Hortalizas",
+      "Berries",
+      "Flores de Corte",
+      "Hornamentales",
+      "Papa",
+      "Frutales",
+      "Musáceas",
+    ],
+    hierarchy: "Solubles - Fósforo",
+    supplier: "",
+    countries: ["Colombia"],
+    image: "productsImg/solufos_44.png",
+  },
+  {
+    name: "Amilsol NKS",
+    description:
+      "Fertilizante de alta solubilidad con nutrientes esenciales que mejoran el desarrollo radicular y fortalecen las plantas.",
+    benefits:
+      "El nitrógeno presente es un nutriente esencial para el crecimiento vegetativo, el potasio mejora la resistencia a plagas y enfermedades, y el azufre participa en la síntesis de proteínas.",
+    composition: {
+      "Nitrógeno total (N)": "10.0%",
+      "Nitrógeno amoniacal (NH4)": "10.0%",
+      "Fósforo asimilable (P2O5)": "0.0%",
+      "Potasio soluble en agua (K2O)": "45.0%",
+      "Magnesio total (MgO)": "0.0%",
+      "Azufre total (S)": "5.0%",
+    },
+    cultivation: [
+      "Hortalizas",
+      "Berries",
+      "Flores de Corte",
+      "Hornamentales",
+      "Papa",
+      "Frutales",
+      "Musáceas",
+    ],
+    hierarchy: "Solubles - Potasio",
+    supplier: "",
+    countries: ["Colombia"],
+    image: "productsImg/amilsol_nks.png",
+  },
+  {
+    name: "Nitrosol 30",
+    description:
+      "Fuente de nitrógeno ureico de rápida absorción, ideal para fertirriego en cultivos que requieren aplicaciones intensivas de nitrógeno.",
+    benefits:
+      "Promueve el crecimiento vegetativo de las plantas y mejora la estructura foliar.",
+    composition: {
+      "Nitrógeno total (N)": "30.0%",
+      "Nitrógeno amoniacal (NH4)": "0.0%",
+      "Fósforo asimilable (P2O5)": "0.0%",
+      "Potasio soluble en agua (K2O)": "0.0%",
+      "Magnesio total (MgO)": "0.0%",
+      "Azufre total (S)": "0.0%",
+    },
+    cultivation: [
+      "Hortalizas",
+      "Berries",
+      "Flores de Corte",
+      "Hornamentales",
+      "Papa",
+      "Frutales",
+      "Musáceas",
+    ],
+    hierarchy: "Solubles - Nitrógeno",
+    supplier: "",
+    countries: ["Colombia", "Ecuador"],
+    image: "productsImg/nitrosol_30.png",
+  },
+  {
+    name: "Nitrato de potasio",
+    description:
+      "Fertilizante con un balance adecuado de nitrógeno y potasio, ideal para favorecer la floración y el llenado de frutos.",
+    benefits:
+      "Mejora el desarrollo de la planta en etapas críticas, incrementa la eficiencia de uso del agua y de otros nutrientes.",
+    composition: {
+      "Nitrógeno total (N)": "13.0%",
+      "Nitrógeno amoniacal (NH4)": "0.0%",
+      "Fósforo asimilable (P2O5)": "0.0%",
+      "Potasio soluble en agua (K2O)": "46.0%",
+      "Magnesio total (MgO)": "0.0%",
+      "Azufre total (S)": "0.0%",
+    },
+    cultivation: [
+      "Hortalizas",
+      "Berries",
+      "Flores de Corte",
+      "Hornamentales",
+      "Papa",
+      "Frutales",
+      "Musáceas",
+    ],
+    hierarchy: "Solubles - Potasio",
+    supplier: "",
+    countries: ["Colombia", "Ecuador", "Perú"],
+    image: "productsImg/nitrato_de_potasio.png",
+  },
 ];
 
-export default products;
+module.exports = products;

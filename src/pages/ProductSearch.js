@@ -10,7 +10,7 @@ import ContactCard from "../components/ContactCard";
 import Footer from "../components/Footer";
 import { ReactComponent as Edaficos } from "../assets/edaficos.svg";
 import { ReactComponent as Foliares } from "../assets/foliares.svg";
-import { ReactComponent as Solubles } from "../assets/coadyuvantes.svg"; // Ejemplos de íconos
+import { ReactComponent as Solubles } from "../assets/coadyuvantes.svg";
 import productsData from "../data/newProducts"; // Copia de prueba de productos
 
 const ProductSearch = () => {
@@ -75,15 +75,24 @@ const ProductSearch = () => {
   ];
 
   // Definir la lista de componentes (nutrientes)
-  const components = ["Nitrógeno", "Fósforo", "Potasio", "Calcio", "Magnesio"]; // Nutrientes
+  const components = [
+    "Acondicionador de suelo",
+    "Boro",
+    "NPK",
+    "Fósforo",
+    "Magnesio",
+    "Nitrógeno",
+    "Potasio",
+  ]; // Nutrientes
 
   const handleResetFilters = () => {
     setSearchTerm("");
-    setSelectedCountry("");
-    setSelectedCultivations([]);
-    setSelectedHierarchy("");
-    setSelectedComponent("");
+    setSelectedCountry(""); // Reinicia el filtro de país
+    setSelectedCultivations([]); // Reinicia el filtro de cultivos (BulletList)
+    setSelectedHierarchy(""); // Reinicia la jerarquía
+    setSelectedComponent(""); // Reinicia el filtro de nutrientes
 
+    // Reiniciar la URL eliminando los parámetros
     const url = new URL(window.location);
     url.searchParams.delete("hierarchy");
     url.searchParams.delete("component");
@@ -219,14 +228,14 @@ const ProductSearch = () => {
             title={"Nutrientes"}
             onSelect={handleComponentSelect}
             placeholder={"Seleccionar Nutriente"}
-            selectedItem={selectedComponent} // Preseleccionado desde la URL
+            selectedItem={selectedComponent || ""} // Preseleccionado o vacío tras reiniciar
           />
           <Dropdown
             items={countries}
             title={"País"}
             onSelect={handleCountrySelect}
             placeholder={"Todos los países"}
-            selectedItem={selectedCountry} // Preseleccionado desde la URL
+            selectedItem={selectedCountry || ""} // Preseleccionado o vacío tras reiniciar
           />
           <BulletList
             title={"Cultivos"}
@@ -234,7 +243,7 @@ const ProductSearch = () => {
             onSelect={handleCultivationSelect}
             maxVisible={5}
             showMoreText={"Más cultivos..."}
-            selectedItems={selectedCultivations} // Preseleccionados desde la URL
+            selectedItems={selectedCultivations} // Preseleccionados o vacíos tras reiniciar
           />
           <ResetButton onClick={handleResetFilters}>
             Reiniciar Filtros
