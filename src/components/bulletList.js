@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion"; // Importar framer-motion
 
@@ -34,9 +34,25 @@ const ShowMoreButton = styled.div`
   }
 `;
 
-const BulletFilter = ({ items, onSelect, maxVisible, showMoreText, title }) => {
-  const [selectedItems, setSelectedItems] = useState([]);
+const BulletFilter = ({
+  items,
+  onSelect,
+  maxVisible,
+  showMoreText,
+  title,
+  selectedItems: externalSelectedItems, // Recibir el prop `selectedItems` del componente padre
+}) => {
+  const [selectedItems, setSelectedItems] = useState(
+    externalSelectedItems || []
+  );
   const [showAll, setShowAll] = useState(false);
+
+  // Sincronizar el estado interno `selectedItems` con el prop `externalSelectedItems`
+  useEffect(() => {
+    if (externalSelectedItems) {
+      setSelectedItems(externalSelectedItems);
+    }
+  }, [externalSelectedItems]);
 
   const handleToggleItem = (item) => {
     const isSelected = selectedItems.includes(item);

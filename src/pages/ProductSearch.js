@@ -20,7 +20,6 @@ const ProductSearch = () => {
   const [selectedHierarchy, setSelectedHierarchy] = useState("");
   const [selectedComponent, setSelectedComponent] = useState("");
 
-  // Leer parámetros de la URL al montar el componente
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const hierarchy = urlParams.get("hierarchy");
@@ -228,23 +227,26 @@ const ProductSearch = () => {
             title={"Nutrientes"}
             onSelect={handleComponentSelect}
             placeholder={"Seleccionar Nutriente"}
-            selectedItem={selectedComponent || ""} // Preseleccionado o vacío tras reiniciar
+            selectedItem={selectedComponent || ""} // Aquí se pasa el valor de selectedComponent
           />
           <Dropdown
             items={countries}
             title={"País"}
             onSelect={handleCountrySelect}
             placeholder={"Todos los países"}
-            selectedItem={selectedCountry || ""} // Preseleccionado o vacío tras reiniciar
+            selectedItem={selectedCountry || ""} // Aquí se pasa el valor de selectedCountry
           />
+
           <BulletList
+            key={`cultivation-reset`} // Cambiar la clave para forzar el renderizado
             title={"Cultivos"}
             items={cultivation}
             onSelect={handleCultivationSelect}
             maxVisible={5}
             showMoreText={"Más cultivos..."}
-            selectedItems={selectedCultivations} // Preseleccionados o vacíos tras reiniciar
+            selectedItems={selectedCultivations} // Aquí se pasa el valor de selectedCultivations
           />
+
           <ResetButton onClick={handleResetFilters}>
             Reiniciar Filtros
           </ResetButton>

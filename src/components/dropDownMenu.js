@@ -1,5 +1,4 @@
-// Dropdown.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FiChevronDown } from "react-icons/fi";
 
@@ -45,16 +44,27 @@ const DropdownItem = styled.div`
   }
 `;
 
-const Dropdown = ({ items, onSelect, title, placeholder }) => {
+const Dropdown = ({ items, onSelect, title, placeholder, selectedItem }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(placeholder || title);
+  const [internalSelectedItem, setInternalSelectedItem] = useState(
+    placeholder || title
+  );
+
+  // Sincroniza el estado interno con el prop `selectedItem`
+  useEffect(() => {
+    if (selectedItem !== "") {
+      setInternalSelectedItem(selectedItem);
+    } else {
+      setInternalSelectedItem(placeholder || title);
+    }
+  }, [selectedItem, placeholder, title]);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
   const handleSelect = (item) => {
-    setSelectedItem(item);
+    setInternalSelectedItem(item);
     setIsOpen(false);
     if (onSelect) {
       onSelect(item);
@@ -62,10 +72,10 @@ const Dropdown = ({ items, onSelect, title, placeholder }) => {
   };
 
   return (
-    <DropdownContainer onChange={toggleDropdown}>
+    <DropdownContainer>
       <h4>{title}</h4>
       <DropdownButton onClick={toggleDropdown}>
-        {selectedItem}
+        {internalSelectedItem}
         <FiChevronDown />
       </DropdownButton>
       <DropdownList isOpen={isOpen}>
