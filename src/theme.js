@@ -10,9 +10,9 @@ export const theme = {
     white: "#FFFFFF",
   },
   fontSizes: {
-    small: "16px",
-    medium: "18px",
-    normal: "24px",
+    small: "14px",
+    medium: "16px",
+    normal: "18px",
     large: "28px",
     xlarge: "32px",
     xxlarge: "48px",

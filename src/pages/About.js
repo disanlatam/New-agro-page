@@ -9,6 +9,7 @@ import soluciones from "../assets/nosotros/soluciones.png";
 import asesoria from "../assets/nosotros/asesoria.png";
 import suministro from "../assets/nosotros/suministro.png";
 import Footer from "../components/Footer";
+import ContactCard from "../components/ContactCard";
 
 const AboutContainer = styled.div`
   display: flex;
@@ -16,7 +17,9 @@ const AboutContainer = styled.div`
   align-items: center;
   background-color: #f9f9f9;
   font-size: ${(props) => props.theme.fontSizes.normal};
+  overflow-x: hidden; /* Evita el scroll horizontal */
 `;
+
 const Description = styled.div`
   display: flex;
   position: relative;
@@ -24,25 +27,30 @@ const Description = styled.div`
   justify-content: center;
   align-items: center;
   color: ${(props) => props.theme.colors.primary};
-
   width: 100%;
   text-align: center;
+
   p {
     max-width: 70vw;
     width: 100%;
     text-align: center;
+
     @media (min-width: 768px) {
       max-width: 50vw;
     }
   }
+
   @media (max-width: 768px) {
     font-size: ${(props) => props.theme.fontSizes.normal};
+    padding: 5% 5%; /* Reduce padding en dispositivos móviles */
   }
 `;
+
 const BannerImg = styled.img`
   width: 100%;
   height: auto;
 `;
+
 const Hero = styled.div`
   display: flex;
   justify-content: center;
@@ -53,14 +61,21 @@ const Hero = styled.div`
   width: 100%;
   font-size: ${(props) => props.theme.fontSizes.normal};
   padding: 5% 10%;
+
   p {
     width: 100%;
     max-width: 70vw;
+
     @media (min-width: 768px) {
       max-width: 50vw;
     }
   }
+
+  @media (max-width: 768px) {
+    padding: 5% 5%; /* Ajuste de padding en dispositivos móviles */
+  }
 `;
+
 const PilaresSection = styled.div`
   display: flex;
   margin-top: 5%;
@@ -75,6 +90,7 @@ const PilaresSection = styled.div`
   color: ${(props) => props.theme.colors.primary};
   padding: 5% 10%;
   margin-bottom: 5%;
+
   span {
     color: ${(props) => props.theme.colors.green};
   }
@@ -82,17 +98,25 @@ const PilaresSection = styled.div`
   h2 {
     margin-bottom: 5%;
   }
+
   @media (max-width: 768px) {
-    max-width: 90vw;
+    max-width: 100vw;
+    padding: 5% 5%; /* Ajuste de padding */
+    overflow-x: hidden; /* Evitar desbordamiento horizontal */
   }
 `;
+
 const PilarContainer = styled.div`
   display: flex;
   gap: 50px;
+
   @media (max-width: 768px) {
     flex-direction: column;
+    gap: 20px; /* Reducir el espacio entre pilares */
+    width: 100%; /* Asegurar que no se desborde */
   }
 `;
+
 const Pilar = styled.div`
   display: flex;
   justify-content: center;
@@ -100,6 +124,7 @@ const Pilar = styled.div`
   align-items: center;
   text-align: left;
   gap: 5px;
+
   .icon-container {
     width: 100px;
     height: 100px;
@@ -107,6 +132,7 @@ const Pilar = styled.div`
     justify-content: center;
     align-items: center;
   }
+
   .description {
     background-color: ${(props) => props.theme.colors.yellow};
     color: white;
@@ -117,62 +143,82 @@ const Pilar = styled.div`
   h3 {
     text-align: center;
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0 5%; /* Ajuste de padding para pilares en móviles */
+  }
 `;
+
 const Icon = styled.img`
   width: 100%;
   height: auto;
   max-width: 100px;
 `;
+
 const PromesasSection = styled.div`
   display: flex;
   text-align: left;
+
   .left {
     border-right: 1px solid ${(props) => props.theme.colors.secondary};
     max-width: 50%;
     padding-right: 5%;
+
     h3 {
       font-size: ${(props) => props.theme.fontSizes.medium} !important;
       margin-bottom: 2%;
+
       @media (max-width: 768px) {
         margin-top: 10%;
       }
     }
+
     h3:not(:first-child) {
       margin-top: 10%;
     }
+
     @media (max-width: 768px) {
       border-right: none;
       max-width: 100%;
     }
   }
+
   .rigth {
     padding-left: 5%;
     max-width: 50%;
+
     h3 {
       font-size: ${(props) => props.theme.fontSizes.medium} !important;
       margin-bottom: 2%;
+
       @media (max-width: 768px) {
         margin-top: 10%;
       }
     }
+
     h3:not(:first-child) {
       margin-top: 10%;
     }
+
     @media (max-width: 768px) {
       max-width: 100%;
     }
   }
+
   .description {
     font-size: ${(props) => props.theme.fontSizes.small};
     display: flex;
     gap: 20px;
     height: 100%;
     max-height: 40%;
+
     img {
       width: 150px;
       height: 150px;
       margin-top: 1%;
     }
+
     @media (max-width: 768px) {
       flex-direction: column;
       justify-content: center;
@@ -185,8 +231,11 @@ const PromesasSection = styled.div`
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding: 0 5%; /* Ajuste de padding para evitar desbordamiento */
+    overflow-x: hidden; /* Evitar desbordamiento horizontal */
   }
 `;
+
 const About = () => {
   return (
     <AboutContainer>
@@ -302,6 +351,7 @@ const About = () => {
           </div>
         </PromesasSection>
       </PilaresSection>
+      <ContactCard />
       <Footer />
     </AboutContainer>
   );

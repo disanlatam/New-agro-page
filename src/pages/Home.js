@@ -11,7 +11,7 @@ import saco from "../assets/sacos-NPK-08.png";
 import siembra from "../assets/disan-siembra@2x.png";
 import pacto from "../assets/Logo_Pacto_Global_UN.png";
 import ColombiaMap from "../components/ColombiaMap";
-import ConctactForm from "../components/ContactForm";
+import ConctactForm from "../components/ContactCard";
 import Footer from "../components/Footer";
 import AlliesSwiper from "../components/alliesCards";
 

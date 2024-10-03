@@ -25,11 +25,26 @@ const InputGroup = styled.div`
   justify-content: space-between;
   align-items: center;
   max-width: 500px;
+
+  /* Media query para pantallas más grandes */
+  @media (min-width: 768px) {
+    gap: 16px; /* Espaciado entre campos */
+  }
+
+  /* Media query para dispositivos móviles */
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const InputContainer = styled.div`
   width: 48%;
   margin-bottom: 16px;
+
+  /* Para dispositivos móviles, los inputs se extienden al 100% */
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const InputField = styled.input`
@@ -41,8 +56,14 @@ const InputField = styled.input`
   padding: 10px 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-size: ${(props) => props.theme.fontSizes.normal};
+
   ::placeholder {
     color: #999;
+  }
+
+  @media (max-width: 768px) {
+    font-size: ${(props) => props.theme.fontSizes.small};
   }
 `;
 
@@ -62,8 +83,19 @@ const TextArea = styled.textarea`
   height: 100px;
   border: 0px solid transparent !important;
   border-radius: 50px 0px 50px 0px !important;
+  font-size: ${(props) => props.theme.fontSizes.medium};
+
   ::placeholder {
     color: #999;
+  }
+
+  @media (max-width: 768px) {
+    border-radius: 4px; /* Se ajusta la forma para móviles */
+    width: 90%;
+    text-align: center;
+    text-justify: center;
+    padding: 0px;
+    margin: 5px 10px;
   }
 `;
 
