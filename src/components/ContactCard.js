@@ -2,9 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const CardContainer = styled.div`
-  * {
-    box-sizing: border-box;
-  }
   color: white;
   background-color: ${(props) => props.theme.colors.yellow};
   width: 100%;
