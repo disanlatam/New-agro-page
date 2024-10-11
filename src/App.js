@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import ProductDetail from "./pages/ProductDetail";
 import ProductSearch from "./pages/ProductSearch";
 import About from "./pages/About";
+import Blog from "./pages/Blog";
 
 function App() {
   const location = useLocation();
@@ -42,6 +43,19 @@ function App() {
                 transition={{ duration: 0.3 }}
               >
                 <About />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/blog"
+            element={
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Blog />
               </motion.div>
             }
           />

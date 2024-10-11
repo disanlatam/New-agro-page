@@ -90,7 +90,18 @@ const ProductDetail = () => {
               </div>
               <div className="benefits">
                 <h2>Beneficios</h2>
-                <p>{product.benefits}</p>
+                <BenefitsList>
+                  {product.benefits
+                    .split(".")
+                    .map(
+                      (benefit, index) =>
+                        benefit.trim() && (
+                          <BenefitItem key={index}>
+                            {benefit.trim()}
+                          </BenefitItem>
+                        )
+                    )}
+                </BenefitsList>
               </div>
               <div>
                 <h2>Cultivos</h2>
@@ -129,6 +140,24 @@ const ProductDetail = () => {
   );
 };
 
+const BenefitsList = styled.ul`
+  list-style-type: none;
+  padding-left: 0;
+`;
+
+const BenefitItem = styled.li`
+  position: relative;
+  padding-left: 10px;
+  &::before {
+    content: "•";
+    position: absolute;
+    margin-top: 0.2em;
+    left: 0;
+    color: ${(props) => props.theme.colors.green};
+    font-size: ${(props) => props.theme.fontSizes.medium};
+    line-height: 1;
+  }
+`;
 const LeftSide = styled.div`
   width: 100%;
   max-width: 30%;
@@ -136,13 +165,19 @@ const LeftSide = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  overflow: hidden; /* Evita que el zoom sobresalga */
 
   img {
     width: 100%;
     max-width: 500px;
     height: auto;
+    transition: transform 0.3s ease-in-out;
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 `;
+
 const RightSide = styled.div`
   width: 100%;
   max-width: 50%;
@@ -234,7 +269,7 @@ const CompCard = styled.div`
   color: white;
   background: rgb(215, 164, 69);
   border: 0px solid transparent;
-  border-radius: 50px 0px 50px 0px;
+  border-radius: 20px 0px 20px 0px;
   background: linear-gradient(
     45deg,
     rgba(215, 164, 69, 1) 50%,
