@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import BlogList from "../components/BlogList";
 
 const BlogContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  width: 100%;
 `;
 
 const BlogTitle = styled.h1`
@@ -13,10 +14,10 @@ const BlogTitle = styled.h1`
   margin-bottom: 20px;
 `;
 
-const BlogList = styled.div`
-  width: 100%;
-  max-width: 800px;
-`;
+// const BlogList = styled.div`
+//   width: 100%;
+//   max-width: 800px;
+// `;
 
 const BlogItem = styled.div`
   background: #f9f9f9;
@@ -36,24 +37,58 @@ const BlogItemContent = styled.p`
   color: #555;
 `;
 
-const Blog = () => {
-  const blogs = [
-    { title: "Blog Post 1", content: "This is the content of blog post 1." },
-    { title: "Blog Post 2", content: "This is the content of blog post 2." },
-    { title: "Blog Post 3", content: "This is the content of blog post 3." },
-  ];
+const Banner = styled.div`
+  width: 100%;
+  height: 300px;
+  position: relative;
+  background: #f9f9f9;
+  margin-bottom: 20px;
+  background-image: url("./blogImg/banner.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 24px;
+  text-align: center;
+  z-index: 1;
 
+  h1 {
+    @media (max-width: 768px) {
+      font-size: ${(props) => props.theme.fontSizes.large};
+    }
+  }
+  h3 {
+    font-weight: 300;
+    font-size: ${(props) => props.theme.fontSizes.medium};
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Capa semitransparente */
+    z-index: -1; /* Ubica la capa detrás del contenido del banner */
+  }
+
+  @media (max-width: 768px) {
+    height: 150px;
+  }
+`;
+const Blog = () => {
   return (
     <BlogContainer>
-      <BlogTitle>All Blogs</BlogTitle>
-      <BlogList>
-        {blogs.map((blog, index) => (
-          <BlogItem key={index}>
-            <BlogItemTitle>{blog.title}</BlogItemTitle>
-            <BlogItemContent>{blog.content}</BlogItemContent>
-          </BlogItem>
-        ))}
-      </BlogList>
+      <Banner>
+        <h1>Blog DISAN Agro</h1>
+        <h3>Bienvenido, consulta todos los acontecimiento recientes</h3>
+      </Banner>
+      <BlogTitle>Todos los blogs</BlogTitle>
+      <BlogList />
     </BlogContainer>
   );
 };

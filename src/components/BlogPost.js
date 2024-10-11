@@ -31,13 +31,23 @@ const PostContent = styled.p`
   color: #333;
 `;
 
+// Función para truncar el texto a un número específico de palabras
+const truncateText = (text, wordLimit) => {
+  const words = text.split(" ");
+  if (words.length <= wordLimit) return text;
+  return words.slice(0, wordLimit).join(" ") + "...";
+};
+
 const BlogPost = ({ blog }) => {
+  // Recortar el contenido a 20 palabras como ejemplo
+  const truncatedContent = truncateText(blog.content, 20);
+
   return (
     <PostContainer>
       <PostImage src={blog.image} alt={blog.title} />
       <PostTitle>{blog.title}</PostTitle>
       <PostDate>{blog.publishDate}</PostDate>
-      <PostContent>{blog.content}</PostContent>
+      <PostContent>{truncatedContent}</PostContent>
     </PostContainer>
   );
 };

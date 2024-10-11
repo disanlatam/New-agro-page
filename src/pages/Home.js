@@ -306,8 +306,6 @@ const Home = () => {
       <Allies>
         <AlliesSwiper />
       </Allies>
-
-      <Footer />
     </Container>
   );
 };

@@ -352,7 +352,6 @@ const About = () => {
         </PromesasSection>
       </PilaresSection>
       <ContactCard />
-      <Footer />
     </AboutContainer>
   );
 };

@@ -254,7 +254,6 @@ const ProductSearch = () => {
         <ProductList products={filteredProducts} />
       </BottomContainer>
       <ContactCard title="¿Te interesa algún producto?" />
-      <Footer />
     </Container>
   );
 };

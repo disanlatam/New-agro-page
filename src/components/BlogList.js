@@ -1,6 +1,6 @@
 import React from "react";
 import BlogPost from "./BlogPost";
-import { blogs } from "./data/blogs";
+import { blogs } from "../data/blogs";
 import styled from "styled-components";
 
 const BlogContainer = styled.div`

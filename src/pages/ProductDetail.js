@@ -135,7 +135,6 @@ const ProductDetail = () => {
           ))}
         </RelatedProductsList>
       </RelatedProducts>
-      <Footer />
     </Container>
   );
 };

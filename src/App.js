@@ -11,6 +11,7 @@ import ProductDetail from "./pages/ProductDetail";
 import ProductSearch from "./pages/ProductSearch";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
+import Footer from "./components/Footer";
 
 function App() {
   const location = useLocation();
@@ -87,6 +88,7 @@ function App() {
           />
         </Routes>
       </AnimatePresence>
+      <Footer />
     </>
   );
 }
