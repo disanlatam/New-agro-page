@@ -7,6 +7,7 @@ const BlogContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  margin-bottom: 5%;
 `;
 
 const BlogTitle = styled.h1`
@@ -14,32 +15,9 @@ const BlogTitle = styled.h1`
   margin-bottom: 20px;
 `;
 
-// const BlogList = styled.div`
-//   width: 100%;
-//   max-width: 800px;
-// `;
-
-const BlogItem = styled.div`
-  background: #f9f9f9;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
-
-const BlogItemTitle = styled.h2`
-  font-size: 1.5em;
-  margin-bottom: 10px;
-`;
-
-const BlogItemContent = styled.p`
-  font-size: 1em;
-  color: #555;
-`;
-
 const Banner = styled.div`
   width: 100%;
-  height: 300px;
+  height: 450px;
   position: relative;
   background: #f9f9f9;
   margin-bottom: 20px;

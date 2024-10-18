@@ -224,9 +224,9 @@ const ProductSearch = () => {
           {/* Dropdown de Nutrientes */}
           <Dropdown
             items={components}
-            title={"Nutrientes"}
+            title={"Categoria"}
             onSelect={handleComponentSelect}
-            placeholder={"Seleccionar Nutriente"}
+            placeholder={"Seleccionar Categoria"}
             selectedItem={selectedComponent || ""} // Aquí se pasa el valor de selectedComponent
           />
           <Dropdown

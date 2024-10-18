@@ -445,37 +445,6 @@ const products = [
     image: "productsImg/Firmeza Origen.png",
   },
   {
-    name: "Disan 17-0-28+2(S)",
-    description:
-      "Fertilizante granulado fuente de potasio con nitrógeno amoniacal y nítrico en proporciones iguales. Producto de alta calidad que mejora el rendimiento de los cultivos.",
-    benefits:
-      "Producto de fertilización de alta calidad diseñado para mejorar el crecimiento y rendimiento de los cultivos, este fertilizante proporciona una nutrición equilibrada y específica para promover un desarrollo saludable de las plantas.",
-    composition: {
-      "Nitrógeno total": "17.0%",
-      "Nitrógeno amoniacal": "8.6%",
-      "Nitrógeno nítrico": "8.4%",
-      "Potasio soluble en agua": "28.0%",
-      "Magnesio total": "0.8%",
-      "Azufre total": "2.0%",
-    },
-    cultivation: [
-      "Papa",
-      "Maiz",
-      "Frutales",
-      "Palma de aceite",
-      "Musaceas",
-      "Café",
-      "Arroz",
-      "Pastos",
-      "Hortalizas",
-      "Cultivos en desarrollo y producción",
-    ],
-    hierarchy: "Edáficos - Complejo NPK",
-    supplier: "DISAN",
-    countries: ["Ecuador", "Colombia", "Panamá"],
-    image: "productsImg/Disan 17-0-28+2(S).png",
-  },
-  {
     name: "Disan 21-0-21+22(S)",
     description:
       "Fertilizante granulado de mezcla química con aporte balanceado de potasio y nitrógeno. El nitrógeno trae proporciones iguales amonio y nítrato.",
@@ -515,27 +484,6 @@ const products = [
     supplier: "No especificado",
     countries: ["Perú", "Colombia", "Panamá"],
     image: "productsImg/Disan 22-3-18-2(S).png",
-  },
-  {
-    name: "Disan triple 16",
-    description:
-      "Mezcla química NPK con balance de los tres elementos más importantes en la nutrición de cultivos. Garantiza una aplicación uniforme de los nutrientes.",
-    benefits:
-      "Mezcla química de fertilizante NPK donde cada grano contiene la misma proporción de nutrientes para garantizar una mayor homogeneidad en la aplicación en campo.",
-    composition: {
-      "Nitrógeno total": "16.0%",
-      "Nitrógeno amoniacal": "8%",
-      "Nitrógeno nítrico": "8%",
-      "Fósforo asimilable": "16.0%",
-      "Potasio soluble en agua": "16.0%",
-      "Magnesio total": "0.4%",
-      "Azufre total": "1.0%",
-    },
-    cultivation: ["Palma de Aceite", "Papa"],
-    hierarchy: "Edáficos - Complejo NPK",
-    supplier: "No especificado",
-    countries: ["Ecuador", "Perú", "Colombia"],
-    image: "productsImg/Disan triple 16.png",
   },
   {
     name: "Firmeza Menores",
@@ -618,32 +566,6 @@ const products = [
     supplier: "DISAN",
     countries: ["Colombia", "Ecuador", "Panamá"],
     image: "productsImg/Disan desarrollo.png",
-  },
-  {
-    name: "Disan inicio 12-27-13-2+1(S)",
-    description:
-      "Fertilizante NPK mezcla física con alto contenido de fósforo recubierto. Ideal para aplicación a la siembra, etapas iniciales del cultivo y/o desarrollo de raíces.",
-    benefits:
-      "Mezcla física NPK balanceada ideal para etapas iniciales de desarrollo de la planta. Fuente de nitrógeno amoniacal y fósforo proveniente del MAP recubierto, que hace de Disan Inicio una fuente de alta eficiencia.",
-    composition: {
-      "Nitrógeno total (N)": "12.0%",
-      "Nitrógeno amoniacal (NH4)": "5.3%",
-      "Nitrógeno ureico (NH2)": "6.7%",
-      "Fósforo asimilable (P2O5)": "27.0%",
-      "Potasio soluble en agua (K2O)": "13.0%",
-      "Magnesio total (MgO)": "2.0%",
-      "Azufre total (S)": "1.3%",
-    },
-    cultivation: [
-      "Banano",
-      "Papa",
-      "Arroz",
-      "Cultivos en etapas iniciales de desarrollo",
-    ],
-    hierarchy: "Edáficos - Mezclas Físicas NPK",
-    supplier: "DISAN",
-    countries: ["Perú", "Ecuador", "Colombia"],
-    image: "productsImg/Disan inicio 12-27-13-2+1(S).png",
   },
   {
     name: "Disan siembra",
@@ -848,33 +770,6 @@ const products = [
     image: "productsImg/Disan NPK Carga.png",
   },
   {
-    name: "Firmeza Origen",
-    description:
-      "Fertilizante edáfico fuente de Silicio producido con materias primas de alta calidad, sometido a tratamiento térmico que mejora el desempeño del producto.",
-    benefits:
-      "Aporta al suelo Silicio (Si), tomado como Ácido Monosilícico. Se moviliza vía xilema y se deposita alrededor de la pared celular, fortaleciendo los tejidos vegetales. Promueve la liberación del fósforo (P) fijado en el suelo, promoviendo el desarrollo radicular.",
-    composition: {
-      "Silicio (SiO2)": "70%",
-    },
-    cultivation: [
-      "Papa",
-      "Maiz",
-      "Palma",
-      "Frutales",
-      "Palma de aceite",
-      "Musaceas",
-      "Café",
-      "Arroz",
-      "Pastos",
-      "Hortalizas",
-      "Cultivos en desarrollo y producción",
-    ],
-    hierarchy: "Edáficos - Silicio",
-    supplier: "CRENTO",
-    countries: ["Colombia", "Bolivia", "Perú"],
-    image: "productsImg/Firmeza Origen.png",
-  },
-  {
     name: "Disan 17-0-28+2(S)",
     description:
       "Fertilizante granulado fuente de potasio con nitrógeno amoniacal y nítrico en proporciones iguales. Producto de alta calidad que mejora el rendimiento de los cultivos.",
@@ -926,27 +821,6 @@ const products = [
     image: "productsImg/Disan 21-0-21+22(S).png",
   },
   {
-    name: "Disan 22-3-18-2(S)",
-    description:
-      "Mezcla especial balanceada para la fertilización del café con una relación ideal N/K de 1.2:1.",
-    benefits:
-      "El nitrógeno es vital para el desarrollo de hojas y tallos, así como para síntesis de proteínas y enzimas en las plantas. El fósforo es esencial para el desarrollo de raíces fuertes y saludables.",
-    composition: {
-      "Nitrógeno total": "22.0%",
-      "Nitrógeno amoniacal": "11.0%",
-      "Nitrógeno nítrico": "11.0%",
-      "Fósforo asimilable": "3.0%",
-      "Potasio soluble en agua": "18.0%",
-      "Magnesio total": "0.4%",
-      "Azufre total": "1.55%",
-    },
-    cultivation: ["Café"],
-    hierarchy: "Edáficos - Complejo NPK",
-    supplier: "No especificado",
-    countries: ["Perú", "Colombia", "Panamá"],
-    image: "productsImg/Disan 22-3-18-2(S).png",
-  },
-  {
     name: "Disan triple 16",
     description:
       "Mezcla química NPK con balance de los tres elementos más importantes en la nutrición de cultivos. Garantiza una aplicación uniforme de los nutrientes.",
@@ -965,39 +839,7 @@ const products = [
     hierarchy: "Edáficos - Complejo NPK",
     supplier: "No especificado",
     countries: ["Ecuador", "Perú", "Colombia"],
-    image: "productsImg/Disan triple 16.png",
-  },
-  {
-    name: "Firmeza Menores",
-    description:
-      "Fertilizante compuesto que tiene microelementos y nutrientes secundarios que aportan a una nutrición balanceada de la planta.",
-    benefits:
-      "Perfecto para mezclar con los fertilizantes NPK, aportando macronutrientes secundarios como calcio y azufre, micronutrientes como boro, cobre y zinc. Mejora la calidad de los cultivos.",
-    composition: {
-      "Silicio total (SiO2)": "27.5%",
-      "Fósforo (P2O5)": "4.0%",
-      "Calcio total (CaO)": "11.0%",
-      "Azufre total (S)": "2.1%",
-      "Boro (B)": "0.6%",
-      "Cobre (Cu)": "0.5%",
-      "Zinc (Zn)": "1.5%",
-      pH: "8.0",
-    },
-    cultivation: [
-      "Papa",
-      "Maiz",
-      "Frutales",
-      "Palma de aceite",
-      "Musaceas",
-      "Café",
-      "Arroz",
-      "Pastos",
-      "Hortalizas",
-    ],
-    hierarchy: "Edáficos - Complejo Menores",
-    supplier: "CRENTO",
-    countries: ["Colombia", "Panamá", "Ecuador"],
-    image: "productsImg/Firmeza Menores.png",
+    image: "productsImg/Triple 16.png",
   },
   {
     name: "Azufertil 5E",
@@ -1076,51 +918,6 @@ const products = [
     image: "productsImg/Disan inicio 12-27-13-2+1(S).png",
   },
   {
-    name: "Disan siembra",
-    description:
-      "Fertilizante NPK mezcla física con alto contenido de fósforo a base de MAP recubierto con el polímero AVAIL T5 que reduce la fijación del fósforo en el suelo.",
-    benefits:
-      "Mezcla física NPK balanceada ideal para etapas iniciales de desarrollo de la planta. Evita la fijación de fósforo e incrementa su disponibilidad para la planta.",
-    composition: {
-      "Nitrógeno total (N)": "7.0%",
-      "Nitrógeno amoniacal (NH4)": "7.0%",
-      "Fósforo asimilable (P2O5)": "35.0%",
-      "Potasio soluble en agua (K2O)": "12.0%",
-      "Magnesio total (MgO)": "2.0%",
-      "Azufre total (S)": "2.0%",
-    },
-    cultivation: [
-      "Arroz",
-      "Maíz",
-      "Cultivos en etapas iniciales de desarrollo",
-    ],
-    hierarchy: "Edáficos - Mezclas Físicas NPK",
-    supplier: "DISAN",
-    countries: ["Bolivia", "Colombia", "Ecuador"],
-    image: "productsImg/Disan siembra.png",
-  },
-  {
-    name: "Disan Factor",
-    description:
-      "Mezcla física NPK con alto contenido de nitrógeno y potasio de fuentes de alta eficiencia (UREA NUTRISPHERE y PATENTKALI). Aporta magnesio y azufre. Una fuente ideal para mejorar la calidad y producción de café.",
-    benefits:
-      "Fertilizante con alto aporte de nitrógeno recubierto y en menor proporción de potasio, ideal para cultivos en etapas de desarrollo previas a la producción. Contiene PATENTKALI, una fuente en forma de sulfato de potasio y sulfato de magnesio, para tener un adecuado balance de estos tres nutrientes (K, S, Mg) y adquirir resultados diferenciadores en la calidad y producción en la cosecha de café.",
-    composition: {
-      "Nitrógeno total (N)": "23.0%",
-      "Nitrógeno amoniacal (NH4)": "1.0%",
-      "Nitrógeno ureico (NH2)": "22.0%",
-      "Fósforo asimilable (P2O5)": "4.5%",
-      "Potasio soluble en agua (K2O)": "21.0%",
-      "Magnesio total (MgO)": "1.6%",
-      "Azufre total (S)": "2.0%",
-    },
-    cultivation: ["Café"],
-    hierarchy: "Edáficos - Mezclas Físicas NPK",
-    supplier: "DISAN",
-    countries: ["Colombia", "Ecuador", "Panamá"],
-    image: "productsImg/Disan Factor.png",
-  },
-  {
     name: "CTA-HUMUS NK",
     description:
       "Acondicionador orgánico húmico para aplicación al suelo, indicado para mejorar las condiciones de intercambio catiónico y optimizar la absorción de nutrientes.",
@@ -1146,7 +943,7 @@ const products = [
     hierarchy: "Solubles - Acondicionadores del suelo",
     supplier: "",
     countries: ["Colombia", "Ecuador"],
-    image: "productsImg/cta-humus_nk.png",
+    image: "productsImg/CTA-HUMUS NK.png",
   },
   {
     name: "Entec Solub 21",
@@ -1174,7 +971,7 @@ const products = [
     hierarchy: "Solubles - Nitrógeno",
     supplier: "",
     countries: ["Colombia"],
-    image: "productsImg/entec_solub_21.png",
+    image: "productsImg/Entec Solub 21.png",
   },
   {
     name: "Fosfato monopotásico",
@@ -1202,7 +999,7 @@ const products = [
     hierarchy: "Solubles - Fósforo",
     supplier: "",
     countries: ["Colombia", "Perú"],
-    image: "productsImg/fosfato_monopotasico.png",
+    image: "productsImg/Fosfato monopotásico.png",
   },
   {
     name: "Solufos 44",
@@ -1230,7 +1027,7 @@ const products = [
     hierarchy: "Solubles - Fósforo",
     supplier: "",
     countries: ["Colombia"],
-    image: "productsImg/solufos_44.png",
+    image: "productsImg/Solufos 44.png",
   },
   {
     name: "Amilsol NKS",
@@ -1258,7 +1055,7 @@ const products = [
     hierarchy: "Solubles - Potasio",
     supplier: "",
     countries: ["Colombia"],
-    image: "productsImg/amilsol_nks.png",
+    image: "productsImg/Amilsol NKS.png",
   },
   {
     name: "Nitrosol 30",
@@ -1314,7 +1111,7 @@ const products = [
     hierarchy: "Solubles - Potasio",
     supplier: "",
     countries: ["Colombia", "Ecuador", "Perú"],
-    image: "productsImg/nitrato_de_potasio.png",
+    image: "productsImg/Nitrato de potasio.png",
   },
 ];
 

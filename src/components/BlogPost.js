@@ -1,5 +1,7 @@
+// BlogPost.js
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const PostContainer = styled.div`
   border: 1px solid #ccc;
@@ -31,24 +33,36 @@ const PostContent = styled.p`
   color: #333;
 `;
 
-// Función para truncar el texto a un número específico de palabras
 const truncateText = (text, wordLimit) => {
   const words = text.split(" ");
   if (words.length <= wordLimit) return text;
   return words.slice(0, wordLimit).join(" ") + "...";
 };
 
+// Función para generar el slug
+const generateSlug = (title) => {
+  return title
+    .toLowerCase()
+    .replace(/ /g, "-")
+    .replace(/[^\w-]+/g, "");
+};
+
 const BlogPost = ({ blog }) => {
-  // Recortar el contenido a 20 palabras como ejemplo
   const truncatedContent = truncateText(blog.content, 20);
+  const slug = generateSlug(blog.title);
 
   return (
-    <PostContainer>
-      <PostImage src={blog.image} alt={blog.title} />
-      <PostTitle>{blog.title}</PostTitle>
-      <PostDate>{blog.publishDate}</PostDate>
-      <PostContent>{truncatedContent}</PostContent>
-    </PostContainer>
+    <Link
+      to={`/blog/${slug}`}
+      style={{ textDecoration: "none", color: "inherit" }}
+    >
+      <PostContainer>
+        <PostImage src={`/blogImg/${blog.id}.jpg`} alt={blog.title} />
+        <PostTitle>{blog.title}</PostTitle>
+        <PostDate>{blog.publishDate}</PostDate>
+        <PostContent>{truncatedContent}</PostContent>
+      </PostContainer>
+    </Link>
   );
 };
 

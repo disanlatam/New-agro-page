@@ -1,3 +1,4 @@
+// App.js
 import {
   BrowserRouter as Router,
   Route,
@@ -12,6 +13,8 @@ import ProductSearch from "./pages/ProductSearch";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
 import Footer from "./components/Footer";
+import BlogDetail from "./pages/BlogDetail";
+import ScrollToTop from "./utils/ScrollToTop"; // Importar el nuevo componente
 
 function App() {
   const location = useLocation();
@@ -19,6 +22,7 @@ function App() {
   return (
     <>
       <Header />
+      <ScrollToTop /> {/* Agregar aquí el componente para manejar el scroll */}
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route
@@ -57,6 +61,19 @@ function App() {
                 transition={{ duration: 0.3 }}
               >
                 <Blog />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/blog/:slug"
+            element={
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <BlogDetail />
               </motion.div>
             }
           />
