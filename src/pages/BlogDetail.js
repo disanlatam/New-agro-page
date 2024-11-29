@@ -48,7 +48,7 @@ const BlogDate = styled.p`
   text-align: left;
 `;
 
-const BlogContent = styled.p`
+const BlogContent = styled.div`
   font-size: 1.2rem;
   color: #333;
   line-height: 1.6;
@@ -162,7 +162,15 @@ const BlogDetail = () => {
 
       <BlogDetailContainer>
         <BlogDate>{blog.publishDate}</BlogDate>
-        <BlogContent>{blog.content}</BlogContent>
+        <BlogContent>
+          {blog.content.split(". ").map((sentence, index) => (
+            <React.Fragment key={index}>
+              <p>{sentence.trim()}.</p>{" "}
+              {/* Añade un punto al final de cada oración */}
+              <br /> {/* Salto de línea adicional */}
+            </React.Fragment>
+          ))}
+        </BlogContent>
         <BackButton onClick={() => navigate(-1)}>Atrás</BackButton>
       </BlogDetailContainer>
 
