@@ -1,4 +1,3 @@
-// App.js
 import {
   BrowserRouter as Router,
   Route,
@@ -14,6 +13,7 @@ import About from "./pages/About";
 import Blog from "./pages/Blog";
 import Footer from "./components/Footer";
 import BlogDetail from "./pages/BlogDetail";
+import DisanSiembra from "./pages/DisanSiembra";
 import ScrollToTop from "./utils/ScrollToTop"; // Importar el nuevo componente
 
 function App() {
@@ -48,6 +48,19 @@ function App() {
                 transition={{ duration: 0.3 }}
               >
                 <About />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/disan-siembra"
+            element={
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <DisanSiembra />
               </motion.div>
             }
           />
