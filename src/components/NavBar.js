@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import logoDisan from "../assets/logo-disan-agro.png";
 import { Link } from "react-router-dom";
@@ -20,12 +20,14 @@ const Logo = styled.div`
     }
   }
 `;
+
 const LinksContainer = styled.div`
   display: flex;
   @media (max-width: 768px) {
     display: none;
   }
 `;
+
 const NavLink = styled(Link)`
   display: flex;
   align-items: center;
@@ -47,51 +49,33 @@ const NavLink = styled(Link)`
     transition-delay: 0s;
   }
 `;
-const DropdownContainer = styled.div`
+
+const DropdownMenu = styled.div`
   position: relative;
-  display: inline-block;
-  @media (min-width: 768px) {
-    display: none;
-  }
 `;
 
-const DropdownButton = styled.button`
-  background-color: transparent;
-  color: ${(props) => props.theme.colors.green};
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  svg {
-    font-size: 24px; /* Ajusta el tamaño del icono aquí */
-    color: ${(props) =>
-      props.theme.colors.green}; /* Ajusta el color del icono aquí */
-  }
-  &:hover {
-    background-color: ${(props) => props.theme.colors.green};
-    color: ${(props) => props.theme.colors.white};
-    svg {
-      color: ${(props) => props.theme.colors.white};
-    }
-  }
-`;
-
-const DropdownContent = styled.div`
+const SubMenu = styled.div`
   display: ${(props) => (props.isOpen ? "block" : "none")};
   position: absolute;
-  padding: 10px 0;
+  top: 40px;
+  left: 0;
   background-color: ${(props) => props.theme.colors.white};
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-  border-radius: 10px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  z-index: 1000;
+  min-width: 200px;
+
   a {
     display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: ${(props) => props.theme.colors.primary};
+    font-weight: bold;
+
+    &:hover {
+      background-color: ${(props) => props.theme.colors.green};
+      color: ${(props) => props.theme.colors.white};
+    }
   }
 `;
 
@@ -102,31 +86,40 @@ const NavBarContainer = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 1rem 20px;
-  #logo {
-    background-color: white;
-  }
 `;
+
 const RigthContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: row;
   gap: 10px;
 `;
+
 const NavBar = () => {
   const [activeLink, setActiveLink] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
+  const [isSustainabilityOpen, setIsSustainabilityOpen] = useState(false);
+  let closeTimeout = null;
+
   const handleLinkClick = (link) => {
     setActiveLink(link);
   };
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+
+  const openSustainabilityMenu = () => {
+    clearTimeout(closeTimeout);
+    setIsSustainabilityOpen(true);
   };
-  const openDropdown = () => {
-    setIsOpen(true);
+
+  const closeSustainabilityMenu = () => {
+    closeTimeout = setTimeout(() => {
+      setIsSustainabilityOpen(false);
+    }, 300); // Retraso para permitir al usuario moverse
   };
-  const closeDropdown = () => {
-    setIsOpen(false);
-  };
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(closeTimeout); // Limpiar timeout al desmontar
+    };
+  }, []);
 
   return (
     <NavBarContainer>
@@ -140,53 +133,6 @@ const NavBar = () => {
           <img src={logoDisan} alt="DISAN Agro Logo" />
         </NavLink>
       </Logo>
-
-      <DropdownContainer onMouseLeave={closeDropdown}>
-        <DropdownButton onClick={toggleDropdown} onMouseEnter={openDropdown}>
-          <HiOutlineMenu />
-        </DropdownButton>
-        <DropdownContent
-          isOpen={isOpen}
-          onMouseEnter={openDropdown}
-          onMouseLeave={closeDropdown}
-        >
-          <NavLink
-            to="/nosotros"
-            onClick={() => handleLinkClick("/nosotros")}
-            className={activeLink === "/nosotros" ? "active" : ""}
-          >
-            Nosotros
-          </NavLink>
-          <NavLink
-            to="/product-search"
-            onClick={() => handleLinkClick("/product-search")}
-            className={activeLink === "/product-search" ? "active" : ""}
-          >
-            Portafolio
-          </NavLink>
-          <NavLink
-            to="/planes"
-            onClick={() => handleLinkClick("/planes")}
-            className={activeLink === "/planes" ? "active" : ""}
-          >
-            Planes de nutrición
-          </NavLink>
-          <NavLink
-            to="/Sostenibilidad"
-            onClick={() => handleLinkClick("/Sostenibilidad")}
-            className={activeLink === "/Sostenibilidad" ? "active" : ""}
-          >
-            Sostenibilidad
-          </NavLink>
-          <NavLink
-            to="/Blog"
-            onClick={() => handleLinkClick("/Blog")}
-            className={activeLink === "/Blog" ? "active" : ""}
-          >
-            Blog
-          </NavLink>
-        </DropdownContent>
-      </DropdownContainer>
 
       <LinksContainer>
         <NavLink
@@ -210,13 +156,44 @@ const NavBar = () => {
         >
           Planes de nutrición
         </NavLink>
-        <NavLink
-          to="/Sostenibilidad"
-          onClick={() => handleLinkClick("/Sostenibilidad")}
-          className={activeLink === "/Sostenibilidad" ? "active" : ""}
+        <DropdownMenu
+          onMouseEnter={openSustainabilityMenu}
+          onMouseLeave={closeSustainabilityMenu}
         >
-          Sostenibilidad
-        </NavLink>
+          <NavLink
+            to="/Sostenibilidad"
+            onClick={() => handleLinkClick("/Sostenibilidad")}
+            className={activeLink === "/Sostenibilidad" ? "active" : ""}
+          >
+            Sostenibilidad
+          </NavLink>
+          <SubMenu isOpen={isSustainabilityOpen}>
+            <NavLink
+              to="/disan-siembra"
+              onClick={() => setIsSustainabilityOpen(false)}
+            >
+              Disan Siembra
+            </NavLink>
+            <NavLink
+              to="/pacto-global"
+              onClick={() => setIsSustainabilityOpen(false)}
+            >
+              Pacto Global
+            </NavLink>
+            <NavLink
+              to="/mayacert"
+              onClick={() => setIsSustainabilityOpen(false)}
+            >
+              Mayacert
+            </NavLink>
+            <NavLink
+              to="/empaques-sostenibles"
+              onClick={() => setIsSustainabilityOpen(false)}
+            >
+              Empaques Sostenibles
+            </NavLink>
+          </SubMenu>
+        </DropdownMenu>
         <NavLink
           to="/Blog"
           onClick={() => handleLinkClick("/Blog")}
